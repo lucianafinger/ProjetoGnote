@@ -1,88 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".CadastroActivity">
+    android:layout_width="match_parent"
+    android:id="@+id/scroll">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="268dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.projetognote.activity.CadastroActivity"
+        tools:layout_editor_absoluteY="25dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_nome"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_nome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nome" />
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="410dp"
+            android:layout_height="367dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="@string/str_email"
+                app:counterEnabled="true"
+                app:counterMaxLength="50"
+                app:errorEnabled="true"
+                app:startIconDrawable="@android:drawable/sym_action_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="E-mail" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txt_Senha"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_senha"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Senha" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/txt_confirma_senha"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/et_confirma_senha"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Confirma Senha" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="119dp"
-                            android:orientation="horizontal">
-
-                            <CheckBox
-                                android:id="@+id/cb_termos"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Aceitar Termos de Uso" />
-
-                            <Button
-                                android:id="@+id/bt_cadastrar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Cadastrar" />
-
-                        </LinearLayout>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                </com.google.android.material.textfield.TextInputLayout>
-
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
-        </com.google.android.material.textfield.TextInputLayout>
 
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_nome"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/str_nome"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:errorEnabled="true">
 
-</RelativeLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_nome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_senha"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha"
+                app:counterEnabled="true"
+                app:startIconDrawable="@android:drawable/ic_secure">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_senha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_confirma_senha"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirma senha"
+                app:counterEnabled="true"
+                app:startIconDrawable="@android:drawable/ic_secure">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_confirma_senha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="410dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+            tools:ignore="MissingConstraints">
+
+            <Switch
+                android:id="@+id/swt_termos"
+                android:layout_width="217dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:text="Aceitar termos de uso"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/bt_cadastrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_button"
+                android:text="@string/str_cadastrar"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
