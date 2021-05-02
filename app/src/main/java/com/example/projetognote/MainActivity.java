@@ -17,23 +17,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btLogin.setOnClickListener(new View.OnClickListener() {
+        this.inicializaComponentes();
+
+        this.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                Intent telaLogin = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(telaLogin);
+//                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
 
-        btCadastro.setOnClickListener(new View.OnClickListener() {
+        this.btCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, C.class));
+                    Intent telaCadastro = new Intent(MainActivity.this, CadastroActivity.class);
+                startActivity(telaCadastro);
+//                startActivity(new Intent(MainActivity.this, CadastroActivity.class));
             }
         });
+
     }
 
     private void inicializaComponentes(){
-        Button btCadastro = findViewById(R.id.bt_cadastro);
-        Button btLogin = findViewById(R.id.bt_login);
+        btCadastro = findViewById(R.id.bt_cadastro);
+        btLogin = findViewById(R.id.bt_login);
     }
 }

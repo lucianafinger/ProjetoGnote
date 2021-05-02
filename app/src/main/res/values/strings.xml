@@ -5,6 +5,19 @@
     <string name="str_nome">Nome</string>
     <string name="str_cadastrar">Cadastrar</string>
     <string name="str_login">Login</string>
+    <string name="title_activity_controle">ControleActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home_registros">Registros</string>
+    <string name="menu_mensal">Visão mensal PDF</string>
+    <string name="menu_perfil">Perfil</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_contato">Fale conosco</string>
 
 
 </resources>

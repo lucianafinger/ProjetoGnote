@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_registros"
+            android:icon="@drawable/ic_home_registros"
+            android:title="@string/menu_home_registros" />
+        <item
+            android:id="@+id/nav_mensal"
+            android:icon="@drawable/ic_mensal"
+            android:title="@string/menu_mensal" />
+        <item
+            android:id="@+id/nav_perfil"
+            android:icon="@drawable/ic_perfil"
+            android:title="@string/menu_perfil" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_voltar"
+            android:title="@string/menu_logout" />
+    </group>
+
+    <item android:title="Contato">
+        <menu>
+            <item
+                android:id="@+id/nav_contato"
+                android:icon="@drawable/ic_contato"
+                android:title="@string/menu_contato" />
+        </menu>
+    </item>
+
+</menu>

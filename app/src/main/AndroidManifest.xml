@@ -9,7 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoGnote">
-        <activity android:name=".CadastroActivity"></activity>
+        <activity android:name=".ui.fragments.PerfilFragment"></activity>
+        <activity android:name=".ui.fragments.MensalFragment" />
+        <activity
+            android:name=".ControleActivity"
+            android:label="@string/title_activity_controle"
+            android:theme="@style/Theme.ProjetoGnote.NoActionBar" />
+        <activity android:name=".CadastroActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

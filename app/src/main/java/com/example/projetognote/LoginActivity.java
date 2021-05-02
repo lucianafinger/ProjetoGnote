@@ -25,15 +25,12 @@ public class LoginActivity extends AppCompatActivity {
 
         this.inicializaComponentes();
 
-        // validar Login
         btLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // VÁLIDO - valida, pega a informação do server e vai p/ tela login
-//                String email = etEmail.getText().toString();
-//                String senha = etSenha.getText().toString();
 
-                // NÃO VÁLIDO - retorna msg de erro
+                Intent telaInicial = new Intent(LoginActivity.this, ControleActivity.class);
+                startActivity(telaInicial);
 
             }
         });
@@ -44,19 +41,6 @@ public class LoginActivity extends AppCompatActivity {
                 // encaminha nova senha por e-mail já cadastrado
             }
         });
-
-//        btLogar.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String login = etEmail.getText().toString();
-//                String senha = etSenha.getText().toString();
-//                if(login.equals("luciana")&&senha.equals("123")){
-//                    alert("Login válido");
-//                }else{
-//                    alert("Login inválido");
-//                }
-//            }
-//        });
 
     }
 

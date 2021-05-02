@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red_button">#B71C1C</color>
+    <color name="red_gnote">#B71C1C</color>
+    <color name="yellow_gnote">#F9A825</color>
+    <color name="blue_gnote">#0277BD</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>

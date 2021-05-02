@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home_registros">
+
+    <fragment
+        android:id="@+id/nav_contato"
+        android:name="com.example.projetognote.ui.fragments.ContatoFragment"
+        android:label="@string/menu_contato"
+        tools:layout="@layout/fragment_contato" />
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.example.projetognote.ui.fragments.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_logout" />
+    <fragment
+        android:id="@+id/nav_home_registros"
+        android:name="com.example.projetognote.ui.fragments.RegistrosFragment"
+        android:label="@string/menu_home_registros"
+        tools:layout="@layout/fragment_registros" />
+
+    <fragment
+        android:id="@+id/nav_mensal"
+        android:name="com.example.projetognote.ui.fragments.MensalFragment"
+        android:label="@string/menu_mensal"
+        tools:layout="@layout/fragment_mensal" />
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.example.projetognote.ui.fragments.PerfilFragment"
+        android:label="@string/menu_perfil"
+        tools:layout="@layout/fragment_perfil" />
+</navigation>
