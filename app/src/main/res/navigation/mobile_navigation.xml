@@ -7,29 +7,40 @@
 
     <fragment
         android:id="@+id/nav_contato"
-        android:name="com.example.projetognote.ui.fragments.ContatoFragment"
+        android:name="com.example.projetognote.fragments.ContatoFragment"
         android:label="@string/menu_contato"
         tools:layout="@layout/fragment_contato" />
     <fragment
         android:id="@+id/nav_logout"
-        android:name="com.example.projetognote.ui.fragments.LogoutFragment"
+        android:name="com.example.projetognote.fragments.LogoutFragment"
         android:label="@string/menu_logout"
         tools:layout="@layout/fragment_logout" />
     <fragment
         android:id="@+id/nav_home_registros"
-        android:name="com.example.projetognote.ui.fragments.RegistrosFragment"
+        android:name="com.example.projetognote.fragments.RegistrosFragment"
         android:label="@string/menu_home_registros"
-        tools:layout="@layout/fragment_registros" />
+        tools:layout="@layout/fragment_registros" >
+        <action
+            android:id="@+id/home_to_editar_registro"
+            app:destination="@id/nav_editar_registro" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_mensal"
-        android:name="com.example.projetognote.ui.fragments.MensalFragment"
+        android:name="com.example.projetognote.fragments.MensalFragment"
         android:label="@string/menu_mensal"
         tools:layout="@layout/fragment_mensal" />
 
     <fragment
         android:id="@+id/nav_perfil"
-        android:name="com.example.projetognote.ui.fragments.PerfilFragment"
+        android:name="com.example.projetognote.fragments.PerfilFragment"
         android:label="@string/menu_perfil"
         tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/nav_editar_registro"
+        android:name="com.example.projetognote.fragments.EditarRegistroFragment"
+        android:label="Editar perfil"
+        tools:layout="@layout/fragment_editar_registro" />
+
 </navigation>

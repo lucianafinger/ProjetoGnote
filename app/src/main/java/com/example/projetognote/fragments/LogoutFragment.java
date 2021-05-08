@@ -1,4 +1,4 @@
-package com.example.projetognote.ui.fragments;
+package com.example.projetognote.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,12 +14,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.projetognote.R;
 
-public class RegistrosFragment extends Fragment {
+public class LogoutFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_registros, container, false);
+        View root = inflater.inflate(R.layout.fragment_logout, container, false);
 
         return root;
     }

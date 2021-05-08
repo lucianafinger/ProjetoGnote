@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.projetognote">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,15 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoGnote">
-        <activity android:name=".ui.fragments.PerfilFragment"></activity>
-        <activity android:name=".ui.fragments.MensalFragment" />
+        <activity android:name=".InfoInsulinaActivity"></activity>
+        <activity android:name=".activity.AdicionarRegistroActivity" />
+        <activity android:name=".fragments.PerfilFragment" />
+        <activity android:name=".fragments.MensalFragment" />
         <activity
-            android:name=".ControleActivity"
+            android:name=".activity.ControleActivity"
             android:label="@string/title_activity_controle"
             android:theme="@style/Theme.ProjetoGnote.NoActionBar" />
-        <activity android:name=".CadastroActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activity.CadastroActivity" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

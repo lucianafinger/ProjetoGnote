@@ -1,4 +1,4 @@
-package com.example.projetognote;
+package com.example.projetognote.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

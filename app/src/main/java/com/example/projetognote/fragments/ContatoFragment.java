@@ -1,4 +1,4 @@
-package com.example.projetognote.ui.fragments;
+package com.example.projetognote.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,8 +15,8 @@ public class ContatoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_contato, container, false);
+        View v = inflater.inflate(R.layout.fragment_contato, container, false);
 
-        return root;
+        return v;
     }
 }

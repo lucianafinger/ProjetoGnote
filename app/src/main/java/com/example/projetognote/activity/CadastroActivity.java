@@ -1,11 +1,18 @@
-package com.example.projetognote;
+package com.example.projetognote.activity;
 
+import android.content.Intent;
+import android.icu.text.IDNA;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
+import android.widget.Toast;
 
+import com.example.projetognote.InfoInsulinaActivity;
+import com.example.projetognote.R;
+import com.example.projetognote.UsuarioService;
+import com.example.projetognote.model.Usuario;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.mobsandgeeks.saripaar.ValidationError;
@@ -13,11 +20,15 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+import com.mobsandgeeks.saripaar.annotation.Password;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CadastroActivity extends AppCompatActivity implements Validator.ValidationListener {
 
@@ -30,23 +41,22 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
     @Email(message = "E-mail inválido")
     private EditText etEmail;
     // arrumar senha cadastro
-//    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
-//    private EditText etSenha;
-//    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
-//    private EditText etConfirmaSenha;
+    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
+    private EditText etSenha;
 
-    private Switch swtTermos;
     private Button btCadastrar;
 
     private Validator validator;
 
     private Usuario usuario;
-    public static ArrayList<Usuario> usuariosCadastrados = new ArrayList<>();
+    private UsuarioService usuarioService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
+//        this.usuario = getArguments().getParcelable("usuario");
 
         this.inicializaComponentes();
 
@@ -54,44 +64,37 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
             @Override
             public void onClick(View v) {
                 validator.validate();
-//                if(validator.isValidating()){
-//                    Intent telaCadastro2 = new Intent(CadastroActivity.this, CadastroDoisActivity.class);
-//                    startActivity(telaCadastro2);
-//                }
+
             }
 
         });
 
     }
 
-    private void inicializaComponentes(){
-        this.etNome = findViewById(R.id.et_nome);
-        this.etEmail = findViewById(R.id.et_email);
-//        this.etSenha = findViewById(R.id.et_senha);
-//        this.etConfirmaSenha = findViewById(R.id.et_confirma_senha);
+    public void cadastrarUsuario(){
+        usuarioService.adicionar(usuario).enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+                }else{
+                    Log.i("DEBUG", response.message());
+                    Log.i("DEBUG", response.errorBody().toString());
+                    Toast.makeText(getApplicationContext(), "Erro ao cadastrar produto.", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Log.i("DEBUG", t.getMessage());
+                Toast.makeText(getApplicationContext(), "Não foi possível cadastrar. O servidor está fora, por favor tente mais tarde.", Toast.LENGTH_LONG).show();
+            }
+        });
 
-        this.txtNome = findViewById(R.id.txt_nome);
-        this.txtEmail = findViewById(R.id.txt_email);
-        this.txtSenha = findViewById(R.id.txt_senha);
-        this.txtConfirmaSenha = findViewById(R.id.txt_confirma_senha);
-
-        this.swtTermos = findViewById(R.id.swt_termos);
-        this.btCadastrar = findViewById(R.id.bt_cadastrar);
-
-        validator = new Validator(this);
-        validator.setValidationListener(this);
-
-        usuario = new Usuario();
-        usuariosCadastrados = new ArrayList<>();
     }
-
-    @Override
+        @Override
     public void onValidationSucceeded() {
-        usuario.setNome(etNome.getText().toString());
-        usuario.setEmail(etEmail.getText().toString());
-        // comparar e validar senha e confirma senha pesquisar!!!
-//        usuario.setSenha(etSenha.getText().toString());
-        usuariosCadastrados.add(usuario);
+        this.cadastrarUsuario();
+        startActivity(new Intent(CadastroActivity.this, InfoInsulinaActivity.class));
     }
 
     @Override
@@ -105,7 +108,7 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
             if(v instanceof TextInputEditText){
                 //descobrir qual componente deu erro
                 switch (v.getId()){
-                    case R.id.et_nome:
+                    case R.id.et_nome_editar:
                         txtNome.setError(msgErro);
                         break;
                     case R.id.et_email:
@@ -121,5 +124,24 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
                 }
             }
         }
+    }
+
+    private void inicializaComponentes(){
+        this.etNome = findViewById(R.id.et_nome_editar);
+        this.etEmail = findViewById(R.id.et_email);
+        this.etSenha = findViewById(R.id.et_senha);
+
+        this.txtNome = findViewById(R.id.txt_nome);
+        this.txtEmail = findViewById(R.id.txt_email);
+        this.txtSenha = findViewById(R.id.txt_senha);
+        this.txtConfirmaSenha = findViewById(R.id.txt_confirma_senha);
+
+        this.btCadastrar = findViewById(R.id.bt_cadastrar);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
+        usuario = new Usuario();
+//        usuariosCadastrados = new ArrayList<>();
     }
 }

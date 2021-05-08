@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoInsulinaActivity">
+
+    <SeekBar
+        android:id="@+id/sb_ideal_max"
+        android:layout_width="317dp"
+        android:layout_height="24dp"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="266dp"
+        tools:ignore="MissingConstraints" />
+
+    <SeekBar
+        android:id="@+id/sb_ideal_min"
+        android:layout_width="317dp"
+        android:layout_height="24dp"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="217dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_ideal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Intervalo ideal glicose:"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="183dp"
+        tools:ignore="MissingConstraints" />
+
+    <SeekBar
+        android:id="@+id/sb_hiper"
+        android:layout_width="317dp"
+        android:layout_height="24dp"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="139dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_hiper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Glicose hiper:"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="107dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_hipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Glicose hipo:"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="22dp"
+        tools:ignore="MissingConstraints" />
+
+    <SeekBar
+        android:id="@+id/sb_hipo"
+        android:layout_width="317dp"
+        android:layout_height="24dp"
+        tools:layout_editor_absoluteX="41dp"
+        tools:layout_editor_absoluteY="63dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Insulina Correção:"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="318dp"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="363dp"
+        android:layout_height="218dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="23dp"
+        tools:layout_editor_absoluteY="361dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_glicose_inicial"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Glicose inicial correção">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_glicose_inicial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txt_intervalo_glicose"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Intervalo de glicose">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_intervalo_glicose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txt_dose_intervalo"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Dose por intervalo">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_dose_intervalo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_registrar_insulina"
+        android:layout_width="153dp"
+        android:layout_height="53dp"
+        android:background="@drawable/custom_button"
+        android:text="registrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

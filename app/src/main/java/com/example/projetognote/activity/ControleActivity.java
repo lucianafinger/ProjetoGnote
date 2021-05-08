@@ -1,8 +1,11 @@
-package com.example.projetognote;
+package com.example.projetognote.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.projetognote.R;
+import com.example.projetognote.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -23,6 +26,13 @@ public class ControleActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private NavController navController;
 
+//    public static Usuario USUARIO = new Usuario();
+//
+//    static {
+//        USUARIO.setNome("Joao da Silva");
+//    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +51,11 @@ public class ControleActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intentAdd = new Intent(ControleActivity.this, AdicionarRegistroActivity.class);
+                startActivity(intentAdd);
+
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
 
@@ -69,6 +82,6 @@ public class ControleActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("alo igao");
+        System.out.println("teste");
     }
 }

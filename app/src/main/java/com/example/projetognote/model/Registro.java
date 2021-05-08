@@ -1,4 +1,4 @@
-package com.example.projetognote;
+package com.example.projetognote.model;
 
 public class Registro {
     private long idRegistro;
