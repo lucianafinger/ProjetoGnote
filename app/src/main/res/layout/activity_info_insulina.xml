@@ -4,22 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoInsulinaActivity">
+    tools:context=".activity.InfoInsulinaActivity">
+
+    <TextView
+        android:id="@+id/tv_hipo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Glicose hipo:"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="25dp" />
 
     <SeekBar
-        android:id="@+id/sb_ideal_max"
+        android:id="@+id/sb_hipo"
         android:layout_width="317dp"
         android:layout_height="24dp"
         tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="266dp"
+        tools:layout_editor_absoluteY="63dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_hiper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Glicose hiper:"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="107dp"
         tools:ignore="MissingConstraints" />
 
     <SeekBar
-        android:id="@+id/sb_ideal_min"
+        android:id="@+id/sb_hiper"
         android:layout_width="317dp"
         android:layout_height="24dp"
         tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="217dp"
+        tools:layout_editor_absoluteY="139dp"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -32,37 +50,19 @@
         tools:ignore="MissingConstraints" />
 
     <SeekBar
-        android:id="@+id/sb_hiper"
+        android:id="@+id/sb_ideal_min"
         android:layout_width="317dp"
         android:layout_height="24dp"
         tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="139dp"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tv_hiper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Glicose hiper:"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="107dp"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/tv_hipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Glicose hipo:"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="22dp"
+        tools:layout_editor_absoluteY="217dp"
         tools:ignore="MissingConstraints" />
 
     <SeekBar
-        android:id="@+id/sb_hipo"
+        android:id="@+id/sb_ideal_max"
         android:layout_width="317dp"
         android:layout_height="24dp"
         tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="63dp"
+        tools:layout_editor_absoluteY="266dp"
         tools:ignore="MissingConstraints" />
 
     <TextView

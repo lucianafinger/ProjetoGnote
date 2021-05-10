@@ -55,7 +55,7 @@
                         android:layout_marginTop="16dp" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/txt_insuina_correcao"
+                        android:id="@+id/txt_insulina_correcao"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">

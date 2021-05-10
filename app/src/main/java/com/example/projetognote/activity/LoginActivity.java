@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.projetognote.R;
+import com.example.projetognote.model.Usuario;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -28,9 +29,9 @@ public class LoginActivity extends AppCompatActivity {
         btLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent telaInicial = new Intent(LoginActivity.this, ControleActivity.class);
-                startActivity(telaInicial);
+                // verificar e passar p proxima tela
+                startActivity(new Intent(LoginActivity.this, ControleActivity.class));
+                // se nao, tente novamente
 
             }
         });

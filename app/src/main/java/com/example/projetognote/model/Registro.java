@@ -1,23 +1,31 @@
 package com.example.projetognote.model;
 
+import java.sql.Date;
+import java.sql.Time;
+
 public class Registro {
     private long idRegistro;
     private int registroGlicose;
-    private String horaRegistro;
-    private String etiqueta; // café, almoço
-    private double insulinaCorrecao;
-    private double insulinaRefeicao;
+    private Date dataRegistro;
+    private Time horaRegistro;
+    private String etiqueta;
+    private double insulinaCorrecao, insulinaRefeicao;
+
+    private Usuario usuario;
 
     public Registro() {
     }
 
-    public Registro(long idRegistro, int registroGlicose, String horaRegistro, String etiqueta, double insulinaCorrecao, double insulinaRefeicao) {
+    public Registro(long idRegistro, int registroGlicose, Date dataRegistro, Time horaRegistro,
+                    String etiqueta, double insulinaCorrecao, double insulinaRefeicao, Usuario usuario) {
         this.idRegistro = idRegistro;
         this.registroGlicose = registroGlicose;
+        this.dataRegistro = dataRegistro;
         this.horaRegistro = horaRegistro;
         this.etiqueta = etiqueta;
         this.insulinaCorrecao = insulinaCorrecao;
         this.insulinaRefeicao = insulinaRefeicao;
+        this.usuario = usuario;
     }
 
     public long getIdRegistro() {
@@ -36,11 +44,19 @@ public class Registro {
         this.registroGlicose = registroGlicose;
     }
 
-    public String getHoraRegistro() {
+    public Date getDataRegistro() {
+        return dataRegistro;
+    }
+
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
+    }
+
+    public Time getHoraRegistro() {
         return horaRegistro;
     }
 
-    public void setHoraRegistro(String horaRegistro) {
+    public void setHoraRegistro(Time horaRegistro) {
         this.horaRegistro = horaRegistro;
     }
 
@@ -66,5 +82,25 @@ public class Registro {
 
     public void setInsulinaRefeicao(double insulinaRefeicao) {
         this.insulinaRefeicao = insulinaRefeicao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    @Override
+    public String toString() {
+        return "Registro{" +
+                "registroGlicose=" + registroGlicose +
+                ", data_registro=" + dataRegistro +
+                ", horaRegistro=" + horaRegistro +
+                ", etiqueta='" + etiqueta + '\'' +
+                ", insulinaCorrecao=" + insulinaCorrecao +
+                ", insulinaFixa=" + insulinaRefeicao +
+                '}';
     }
 }

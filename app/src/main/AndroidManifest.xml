@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoGnote">
-        <activity android:name=".InfoInsulinaActivity"></activity>
+        <activity android:name=".activity.InfoInsulinaActivity"></activity>
         <activity android:name=".activity.AdicionarRegistroActivity" />
         <activity android:name=".fragments.PerfilFragment" />
         <activity android:name=".fragments.MensalFragment" />

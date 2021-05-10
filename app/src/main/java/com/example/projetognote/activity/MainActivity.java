@@ -26,16 +26,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent telaLogin = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(telaLogin);
-//                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
 
         this.btCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent telaCadastro = new Intent(MainActivity.this, CadastroActivity.class);
+                Intent telaCadastro = new Intent(MainActivity.this, CadastroActivity.class);
                 startActivity(telaCadastro);
-//                startActivity(new Intent(MainActivity.this, CadastroActivity.class));
             }
         });
 

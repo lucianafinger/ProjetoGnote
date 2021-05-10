@@ -1,15 +1,14 @@
 package com.example.projetognote.activity;
 
 import android.content.Intent;
-import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
-import com.example.projetognote.InfoInsulinaActivity;
 import com.example.projetognote.R;
 import com.example.projetognote.UsuarioService;
 import com.example.projetognote.model.Usuario;
@@ -40,10 +39,12 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
     @NotEmpty(message = "Campo vazio")
     @Email(message = "E-mail inválido")
     private EditText etEmail;
-    // arrumar senha cadastro
     @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
     private EditText etSenha;
+    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
+    private EditText etConfirmaSenha;
 
+    private Switch swtTermos;
     private Button btCadastrar;
 
     private Validator validator;
@@ -56,15 +57,12 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-//        this.usuario = getArguments().getParcelable("usuario");
-
         this.inicializaComponentes();
 
         this.btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validator.validate();
-
             }
 
         });
@@ -93,20 +91,22 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
     }
         @Override
     public void onValidationSucceeded() {
-        this.cadastrarUsuario();
-        startActivity(new Intent(CadastroActivity.this, InfoInsulinaActivity.class));
+        if(etSenha.equals(etConfirmaSenha)){
+            this.cadastrarUsuario();
+            Toast.makeText(this, "CADASTRADO!", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(CadastroActivity.this, InfoInsulinaActivity.class));
+        } else{
+            Toast.makeText(this, "As senhas não conferem! Tente novamente", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void onValidationFailed(List<ValidationError> errors) {
         for(ValidationError e:errors){
-            // pegar componente q deu erro
             View v = e.getView();
-            // pegar msg de erro
             String msgErro = e.getCollatedErrorMessage(this);
             //decobrir que tipo de componente deu erro
             if(v instanceof TextInputEditText){
-                //descobrir qual componente deu erro
                 switch (v.getId()){
                     case R.id.et_nome_editar:
                         txtNome.setError(msgErro);
@@ -114,7 +114,6 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
                     case R.id.et_email:
                         txtEmail.setError(msgErro);
                         break;
-                    // verificar como fazer para informar que as duas senhas não conferem!!!
                     case R.id.et_senha:
                         txtSenha.setError(msgErro);
                         break;
@@ -130,18 +129,19 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
         this.etNome = findViewById(R.id.et_nome_editar);
         this.etEmail = findViewById(R.id.et_email);
         this.etSenha = findViewById(R.id.et_senha);
+        this.etConfirmaSenha = findViewById(R.id.et_confirma_senha);
 
         this.txtNome = findViewById(R.id.txt_nome);
         this.txtEmail = findViewById(R.id.txt_email);
         this.txtSenha = findViewById(R.id.txt_senha);
         this.txtConfirmaSenha = findViewById(R.id.txt_confirma_senha);
 
+        this.swtTermos = findViewById(R.id.swt_termos);
         this.btCadastrar = findViewById(R.id.bt_cadastrar);
 
         validator = new Validator(this);
         validator.setValidationListener(this);
 
         usuario = new Usuario();
-//        usuariosCadastrados = new ArrayList<>();
     }
 }

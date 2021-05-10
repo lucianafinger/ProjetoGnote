@@ -14,14 +14,23 @@ import retrofit2.http.Path;
 
 public interface RegistroService {
     @POST("registro")
-    Call<Registro> adicionar(@Body Registro registro);
+    Call<Registro> adicionarRegistro(@Body Registro registro);
+
+//    @POST("registro/mes")
+//    Call<List<Registro>> buscarMes(@RequestParam int mes);
+
+//    @POST("registro/dia")
+//    Call<List<Registro>> buscarDia(@RequestParam int dia, @RequestParam int mes);
+
+//    @POST("registro/usuario")
+//    Call<List<Registro>> buscarUSuario(@RequestParam long id);
 
     @GET("registro")
-    Call<List<Registro>> listar();
+    Call<List<Registro>> listarRegistros();
 
     @PUT("registro/{id}")
-    Call<Registro> editar(@Path("id") Integer id, @Body Registro registro);
+    Call<Registro> atualizar(@Path("id") long id, @Body Registro registro);
 
     @DELETE("registro/{id}")
-    Call<Void> deletar(@Path("id") Integer id);
+    Call<Void> deletar(@Path("id") long id);
 }

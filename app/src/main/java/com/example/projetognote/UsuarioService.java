@@ -16,13 +16,16 @@ public interface UsuarioService {
     @POST("usuario")
     Call<Usuario> adicionar(@Body Usuario usuario);
 
+//    @POST("usuario/login")
+//    Call<Usuario> login(@RequestParam String email, @RequestParam String senha);
+
     @GET("usuario")
-    Call<List<Usuario>> listar();
+    Call<List<Usuario>> listarUsuario();
 
     @PUT("usuario/{id}")
-    Call<Usuario> editar(@Path("id") Integer id, @Body Usuario usuario);
+    Call<Usuario> atualizar(@Path("id") long id, @Body Usuario usuario);
 
     @DELETE("usuario/{id}")
-    Call<Void> deletar(@Path("id") Integer id);
+    Call<Void> deletar(@Path("id") long id);
 
 }

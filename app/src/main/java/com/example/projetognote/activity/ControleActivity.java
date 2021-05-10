@@ -53,17 +53,11 @@ public class ControleActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intentAdd = new Intent(ControleActivity.this, AdicionarRegistroActivity.class);
                 startActivity(intentAdd);
-
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
 
         // Drawer Layout
 
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home_registros, R.id.nav_mensal, R.id.nav_perfil, R.id.nav_logout, R.id.nav_contato)
                 .setOpenableLayout(drawer)
