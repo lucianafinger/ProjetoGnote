@@ -1,12 +1,7 @@
 package com.example.projetognote.fragments;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.Navigation;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.projetognote.R;
+import com.example.projetognote.activity.ControleActivity;
 
 public class PerfilFragment extends Fragment {
 

@@ -11,16 +11,21 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="265dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_hora"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_hora"
@@ -30,42 +35,42 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_glicose"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="285dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                android:layout_height="285dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_glicose"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Glicose"
-                    android:layout_marginTop="16dp" />
+                    android:layout_marginTop="16dp"
+                    android:hint="Glicose" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txt_insulina_refeicao"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_insulina_refeicao"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Insulina Refeição"
-                        android:layout_marginTop="16dp" />
+                        android:layout_marginTop="16dp"
+                        android:hint="Insulina Refeição" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/txt_insulina_correcao"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                        android:layout_height="match_parent">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_insulina_correcao"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Insulina Correção"
-                            android:layout_marginTop="16dp" />
+                            android:layout_marginTop="16dp"
+                            android:hint="Insulina Correção" />
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </com.google.android.material.textfield.TextInputLayout>

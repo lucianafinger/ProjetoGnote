@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.projetognote.R;
+import com.example.projetognote.fragments.PerfilFragment;
 import com.example.projetognote.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -51,11 +52,9 @@ public class ControleActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentAdd = new Intent(ControleActivity.this, AdicionarRegistroActivity.class);
-                startActivity(intentAdd);
+                startActivity(new Intent(ControleActivity.this, AdicionarRegistroActivity.class));
             }
         });
-
         // Drawer Layout
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(

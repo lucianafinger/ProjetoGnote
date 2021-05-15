@@ -62,7 +62,8 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
         this.btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validator.validate();
+//                validator.validate();
+                startActivity(new Intent(CadastroActivity.this, InfoInsulinaActivity.class));
             }
 
         });

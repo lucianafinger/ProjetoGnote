@@ -24,13 +24,14 @@ public class InfoInsulinaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_insulina);
 
+        inicializaComponentes();
+
         btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(InfoInsulinaActivity.this, LoginActivity.class));
+                startActivity(new Intent(InfoInsulinaActivity.this, ControleActivity.class));
             }
         });
-
 
     }
 

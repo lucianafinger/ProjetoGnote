@@ -21,6 +21,8 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_registro);
 
+        this.inicializaComponentes();
+
         btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

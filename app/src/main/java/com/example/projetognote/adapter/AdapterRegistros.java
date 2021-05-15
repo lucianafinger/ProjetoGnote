@@ -37,7 +37,7 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Registro registro = listaRegistros.get(position);
-        holder.hora.setText(registro.getHoraRegistro());
+//        holder.hora.setText(registro.getHoraRegistro());
         holder.glicose.setText(registro.getRegistroGlicose());
         holder.insulinaRefeicao.setText((int) registro.getInsulinaRefeicao());
         holder.insulinaCorrecao.setText((int) registro.getInsulinaCorrecao());

@@ -55,6 +55,7 @@
             android:id="@+id/iv_etiqueta"
             android:layout_width="36dp"
             android:layout_height="55dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            app:srcCompat="@drawable/bom" />
     </LinearLayout>
 </LinearLayout>
