@@ -31,7 +31,7 @@
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_email"
+            android:id="@+id/txt_email_login"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             app:counterMaxLength="50">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_email"
+                android:id="@+id/et_email_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="E-mail" />
@@ -47,14 +47,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/txt_confirma_senha"
+            android:id="@+id/txt_senha_login"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Senha">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_confirma_senha"
+                android:id="@+id/et_senha_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

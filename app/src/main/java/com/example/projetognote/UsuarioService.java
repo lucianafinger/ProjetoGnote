@@ -16,6 +16,11 @@ public interface UsuarioService {
     @POST("usuario")
     Call<Usuario> adicionar(@Body Usuario usuario);
 
+    @GET("/loginsenha/{email}/{senha}")
+    Call<Usuario> loginsenha(@Path("email") String email, @Path("senha") String senha);
+
+    @POST("usuario/login/{email}/{senha}")
+    Call<Usuario> login(@Path("email") String email, @Path("senha") String senha);
 //    @POST("usuario/login")
 //    Call<Usuario> login(@RequestParam String email, @RequestParam String senha);
 

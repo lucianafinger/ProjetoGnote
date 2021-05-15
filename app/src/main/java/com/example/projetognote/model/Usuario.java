@@ -1,10 +1,13 @@
 package com.example.projetognote.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario implements Serializable {
+public class Usuario implements Serializable, Parcelable {
     private long idUsuario;
     private String nome, email, senha;
     private int correcaoHgt, hipoglicemia, hiperglicemia, idealMinima, idealMaxima, intervalo;
@@ -31,6 +34,32 @@ public class Usuario implements Serializable {
         this.insulina = insulina;
         this.registros = registros;
     }
+
+    protected Usuario(Parcel in) {
+        idUsuario = in.readLong();
+        nome = in.readString();
+        email = in.readString();
+        senha = in.readString();
+        correcaoHgt = in.readInt();
+        hipoglicemia = in.readInt();
+        hiperglicemia = in.readInt();
+        idealMinima = in.readInt();
+        idealMaxima = in.readInt();
+        intervalo = in.readInt();
+        insulina = in.readDouble();
+    }
+
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
 
     public long getIdUsuario() {
         return idUsuario;
@@ -135,4 +164,24 @@ public class Usuario implements Serializable {
                 ", email='" + email + '\'' +
                 '}';
     }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(idUsuario);
+        dest.writeString(nome);
+        dest.writeString(email);
+        dest.writeString(senha);
+        dest.writeInt(correcaoHgt);
+        dest.writeInt(hipoglicemia);
+        dest.writeInt(hiperglicemia);
+        dest.writeInt(idealMinima);
+        dest.writeInt(idealMaxima);
+        dest.writeInt(intervalo);
+        dest.writeDouble(insulina);
+    }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
 }

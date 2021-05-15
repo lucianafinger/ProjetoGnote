@@ -10,6 +10,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.projetognote.R;
+import com.example.projetognote.RetrofitBuilder;
 import com.example.projetognote.UsuarioService;
 import com.example.projetognote.model.Usuario;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,7 +20,6 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Length;
 import com.mobsandgeeks.saripaar.annotation.NotEmpty;
-import com.mobsandgeeks.saripaar.annotation.Password;
 
 import java.util.List;
 
@@ -39,16 +39,15 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
     @NotEmpty(message = "Campo vazio")
     @Email(message = "E-mail inválido")
     private EditText etEmail;
-    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
+//    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
     private EditText etSenha;
-    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
+//    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
     private EditText etConfirmaSenha;
 
     private Switch swtTermos;
     private Button btCadastrar;
 
     private Validator validator;
-
     private Usuario usuario;
     private UsuarioService usuarioService;
 
@@ -62,43 +61,42 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
         this.btCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                validator.validate();
+                validator.validate();
                 startActivity(new Intent(CadastroActivity.this, InfoInsulinaActivity.class));
             }
 
         });
-
     }
 
-    public void cadastrarUsuario(){
-        usuarioService.adicionar(usuario).enqueue(new Callback<Usuario>() {
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if(response.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
-                }else{
-                    Log.i("DEBUG", response.message());
-                    Log.i("DEBUG", response.errorBody().toString());
-                    Toast.makeText(getApplicationContext(), "Erro ao cadastrar produto.", Toast.LENGTH_LONG).show();
-                }
-            }
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.i("DEBUG", t.getMessage());
-                Toast.makeText(getApplicationContext(), "Não foi possível cadastrar. O servidor está fora, por favor tente mais tarde.", Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
         @Override
     public void onValidationSucceeded() {
-        if(etSenha.equals(etConfirmaSenha)){
-            this.cadastrarUsuario();
-            Toast.makeText(this, "CADASTRADO!", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(CadastroActivity.this, InfoInsulinaActivity.class));
-        } else{
-            Toast.makeText(this, "As senhas não conferem! Tente novamente", Toast.LENGTH_LONG).show();
-        }
+        if(etConfirmaSenha.getText().toString().equals(etSenha.getText().toString())){
+            usuario.setEmail(etEmail.getText().toString());
+            usuario.setSenha(etSenha.getText().toString());
+            usuario.setNome(etNome.getText().toString());
+
+            usuarioService.adicionar(usuario).enqueue(new Callback<Usuario>() {
+                @Override
+                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                    if(response.isSuccessful()){
+                            Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(CadastroActivity.this, InfoInsulinaActivity.class));
+                    }else{
+                            Log.i("DEBUG", response.message());
+                            Log.i("DEBUG", response.errorBody().toString());
+                            Toast.makeText(getApplicationContext(), "Erro ao cadastrar produto.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<Usuario> call, Throwable t) {
+                        Log.i("DEBUG", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Não foi possível cadastrar. O servidor está fora, por favor tente mais tarde.", Toast.LENGTH_LONG).show();
+                    }
+                });
+            } else{
+                Toast.makeText(this, "As senhas não conferem! Tente novamente", Toast.LENGTH_LONG).show();
+            }
+
     }
 
     @Override
@@ -112,13 +110,13 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
                     case R.id.et_nome_editar:
                         txtNome.setError(msgErro);
                         break;
-                    case R.id.et_email:
+                    case R.id.et_email_login:
                         txtEmail.setError(msgErro);
                         break;
                     case R.id.et_senha:
                         txtSenha.setError(msgErro);
                         break;
-                    case R.id.et_confirma_senha:
+                    case R.id.et_senha_login:
                         txtConfirmaSenha.setError(msgErro);
                         break;
                 }
@@ -127,7 +125,7 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
     }
 
     private void inicializaComponentes(){
-        this.etNome = findViewById(R.id.et_nome_editar);
+        this.etNome = findViewById(R.id.et_nome);
         this.etEmail = findViewById(R.id.et_email);
         this.etSenha = findViewById(R.id.et_senha);
         this.etConfirmaSenha = findViewById(R.id.et_confirma_senha);
@@ -144,5 +142,6 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
         validator.setValidationListener(this);
 
         usuario = new Usuario();
+        usuarioService = RetrofitBuilder.buildRetrofit().create(UsuarioService.class);
     }
 }

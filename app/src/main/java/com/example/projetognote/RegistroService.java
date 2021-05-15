@@ -25,6 +25,15 @@ public interface RegistroService {
 //    @POST("registro/usuario")
 //    Call<List<Registro>> buscarUSuario(@RequestParam long id);
 
+    @POST("registro/mes/{mes}")
+    Call<List<Registro>> buscarMes( @Path("mes") int mes);
+
+    @POST("registro/dia/{dia}/{mes}")
+    Call<List<Registro>> buscarDia(@Path("dia")int dia, @Path("mes")int mes);
+
+    @POST("registro/usuario/{id}")
+    Call<List<Registro>> buscarUSuario(@Path("id") long id );
+
     @GET("registro")
     Call<List<Registro>> listarRegistros();
 
