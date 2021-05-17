@@ -39,7 +39,7 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
         Registro registro = listaRegistros.get(position);
 //        holder.hora.setText(registro.getHoraRegistro());
         holder.glicose.setText(registro.getRegistroGlicose());
-        holder.insulinaRefeicao.setText((int) registro.getInsulinaRefeicao());
+        holder.insulinaFixa.setText((int) registro.getInsulinaFixa());
         holder.insulinaCorrecao.setText((int) registro.getInsulinaCorrecao());
 
     }
@@ -53,7 +53,7 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView etiqueta;
-        private TextView data, hora, glicose, insulinaRefeicao, insulinaCorrecao;
+        private TextView data, hora, glicose, insulinaFixa, insulinaCorrecao;
         OnRegistroListener onRegistroListener;
 
         public MyViewHolder(@NonNull View itemView, OnRegistroListener onRegistroListener) {
@@ -62,7 +62,7 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
             data = itemView.findViewById(R.id.tv_data);
             hora = itemView.findViewById(R.id.tv_hora);
             glicose = itemView.findViewById(R.id.tv_glicose);
-            insulinaRefeicao = itemView.findViewById(R.id.tv_insulina_refeicao);
+            insulinaFixa = itemView.findViewById(R.id.tv_insulina_refeicao);
             insulinaCorrecao = itemView.findViewById(R.id.tv_insulina_correcao);
             etiqueta = itemView.findViewById(R.id.iv_etiqueta);
 

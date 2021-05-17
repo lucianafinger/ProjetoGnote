@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projetognote.R;
@@ -28,6 +29,8 @@ public class InfoInsulinaActivity extends AppCompatActivity {
     private EditText etGlicose, etIntervalo, etDoseInsulina;
     private Button btRegistrar;
 
+    private TextView tvProgressHipo, tvProgressHiper, tvProgressIdealMin, tvProgressIdealMax;
+
     private Usuario usuario;
     private UsuarioService usuarioService;
 
@@ -38,12 +41,114 @@ public class InfoInsulinaActivity extends AppCompatActivity {
 
         this.inicializaComponentes();
 
-        btRegistrar.setOnClickListener(new View.OnClickListener() {
+        usuario = getIntent().getExtras().getParcelable("usuario");
+
+        // glicose
+        this.sbHipo.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvProgressHipo.setText(" " + progress);
+                int progress_hipo = progress;
+                usuario.setHipoglicemia(progress_hipo);
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        this.sbHiper.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvProgressHiper.setText(" " + progress);
+                int progress_hiper = progress;
+                usuario.setHiperglicemia(progress_hiper);
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+
+
+        this.sbIdealMin.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvProgressIdealMin.setText(" " + progress);
+                int progress_ideal_min = progress;
+                usuario.setIdealMinima(progress_ideal_min);
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        this.sbIdealMax.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                tvProgressIdealMax.setText(" " + progress);
+                int progress_ideal_max = progress;
+                usuario.setIdealMaxima(progress_ideal_max);
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+        });
+
+        this.btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "Bem vindo(a): " + usuario.getNome(), Toast.LENGTH_LONG).show();
 
-                startActivity(new Intent(InfoInsulinaActivity.this, ControleActivity.class));
+                // retorna o valor exato
+                System.out.println("hiper:" + usuario.getHiperglicemia() + " hipo:" + usuario.getHipoglicemia());
+
+                // insulina - não está setando estes valores apenas, da erro ao executar e salvar usuario,
+                // porém os dados do seekbar estão salvando normal assim como os dados do cadastro: senha, email e nome
+                // obs: já tentei valueOf tbm
+
+//                usuario.setCorrecaoHgt(Integer.valueOf(etGlicose.getText().toString()));
+//                usuario.setIntervalo(Integer.valueOf(etIntervalo.getText().toString()));
+//                usuario.setInsulina(Double.valueOf(etDoseInsulina.getText().toString()));
+
+                usuario.setCorrecaoHgt(Integer.parseInt(etGlicose.getText().toString()));
+                usuario.setIntervalo(Integer.parseInt(etIntervalo.getText().toString()));
+                usuario.setInsulina(Double.parseDouble(etDoseInsulina.getText().toString()));
+
+                System.out.println(" correcao hgt: " + usuario.getCorrecaoHgt() + " intervalo: " + usuario.getIntervalo() + " insulina " + usuario.getInsulina());
+
+                usuarioService.adicionar(usuario).enqueue(new Callback<Usuario>() {
+                    @Override
+                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(InfoInsulinaActivity.this, ControleActivity.class));
+                            finish();
+                        } else {
+                            Log.i("DEBUG", response.message());
+                            Log.i("DEBUG", response.errorBody().toString());
+                            Toast.makeText(getApplicationContext(), "Erro ao cadastrar Usuário.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<Usuario> call, Throwable t) {
+                        Log.i("DEBUG", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Não foi possível cadastrar. O servidor está fora, por favor tente mais tarde.", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
+
         });
 
     }
@@ -55,7 +160,20 @@ public class InfoInsulinaActivity extends AppCompatActivity {
         sbIdealMax = findViewById(R.id.sb_ideal_max);
         btRegistrar = findViewById(R.id.bt_registrar_insulina);
 
-    }
+        txtDoseInsulina = findViewById(R.id.txt_dose_intervalo);
+        txtGlicose = findViewById(R.id.txt_glicose);
+        txtIntervalo = findViewById(R.id.txt_intervalo_glicose);
 
+        etGlicose = findViewById(R.id.et_glicose);
+        etDoseInsulina = findViewById(R.id.et_dose_intervalo);
+        etIntervalo = findViewById(R.id.et_intervalo_glicose);
+
+        tvProgressHipo = findViewById(R.id.tv_progress_hipo);
+        tvProgressHiper = findViewById(R.id.tv_progress_hiper);
+        tvProgressIdealMin = findViewById(R.id.tv_progress_ideal_min);
+        tvProgressIdealMax = findViewById(R.id.tv_progress_ideal_max);
+
+        usuarioService = RetrofitBuilder.buildRetrofit().create(UsuarioService.class);
+    }
 
 }

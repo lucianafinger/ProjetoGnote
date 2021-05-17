@@ -1,15 +1,19 @@
 package com.example.projetognote.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 
-public class Registro {
+public class Registro  implements Serializable, Parcelable {
     private long idRegistro;
     private int registroGlicose;
-    private Date dataRegistro;
+    private Date data_registro;
     private Time horaRegistro;
     private String etiqueta;
-    private double insulinaCorrecao, insulinaRefeicao;
+    private double insulinaCorrecao, insulinaFixa;
 
     private Usuario usuario;
 
@@ -17,16 +21,37 @@ public class Registro {
     }
 
     public Registro(long idRegistro, int registroGlicose, Date dataRegistro, Time horaRegistro,
-                    String etiqueta, double insulinaCorrecao, double insulinaRefeicao, Usuario usuario) {
+                    String etiqueta, double insulinaCorrecao, double insulinaFixa, Usuario usuario) {
         this.idRegistro = idRegistro;
         this.registroGlicose = registroGlicose;
-        this.dataRegistro = dataRegistro;
+        this.data_registro = dataRegistro;
         this.horaRegistro = horaRegistro;
         this.etiqueta = etiqueta;
         this.insulinaCorrecao = insulinaCorrecao;
-        this.insulinaRefeicao = insulinaRefeicao;
+        this.insulinaFixa = insulinaFixa;
         this.usuario = usuario;
     }
+
+    protected Registro(Parcel in) {
+        idRegistro = in.readLong();
+        registroGlicose = in.readInt();
+        etiqueta = in.readString();
+        insulinaCorrecao = in.readDouble();
+        insulinaFixa = in.readDouble();
+        usuario = in.readParcelable(Usuario.class.getClassLoader());
+    }
+
+    public static final Creator<Registro> CREATOR = new Creator<Registro>() {
+        @Override
+        public Registro createFromParcel(Parcel in) {
+            return new Registro(in);
+        }
+
+        @Override
+        public Registro[] newArray(int size) {
+            return new Registro[size];
+        }
+    };
 
     public long getIdRegistro() {
         return idRegistro;
@@ -44,12 +69,12 @@ public class Registro {
         this.registroGlicose = registroGlicose;
     }
 
-    public Date getDataRegistro() {
-        return dataRegistro;
+    public Date getData_registro() {
+        return data_registro;
     }
 
-    public void setDataRegistro(Date dataRegistro) {
-        this.dataRegistro = dataRegistro;
+    public void setData_registro(Date data_registro) {
+        this.data_registro = data_registro;
     }
 
     public Time getHoraRegistro() {
@@ -76,12 +101,12 @@ public class Registro {
         this.insulinaCorrecao = insulinaCorrecao;
     }
 
-    public double getInsulinaRefeicao() {
-        return insulinaRefeicao;
+    public double getInsulinaFixa() {
+        return insulinaFixa;
     }
 
-    public void setInsulinaRefeicao(double insulinaRefeicao) {
-        this.insulinaRefeicao = insulinaRefeicao;
+    public void setInsulinaFixa(double insulinaRefeicao) {
+        this.insulinaFixa = insulinaRefeicao;
     }
 
     public Usuario getUsuario() {
@@ -96,11 +121,28 @@ public class Registro {
     public String toString() {
         return "Registro{" +
                 "registroGlicose=" + registroGlicose +
-                ", data_registro=" + dataRegistro +
+                ", data_registro=" + data_registro +
                 ", horaRegistro=" + horaRegistro +
                 ", etiqueta='" + etiqueta + '\'' +
                 ", insulinaCorrecao=" + insulinaCorrecao +
-                ", insulinaFixa=" + insulinaRefeicao +
+                ", insulinaFixa=" + insulinaFixa +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(idRegistro);
+        dest.writeInt(registroGlicose);
+        dest.writeString(etiqueta);
+        dest.writeDouble(insulinaCorrecao);
+        dest.writeDouble(insulinaFixa);
+        dest.writeParcelable(usuario, flags);
+    }
 }
+
+

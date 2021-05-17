@@ -16,12 +16,13 @@
 
         <LinearLayout
             android:id="@+id/linearLayout1"
-            android:layout_width="410dp"
-            android:layout_height="367dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="394dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
@@ -72,7 +73,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_senha"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -87,27 +89,22 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_confirma_senha"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="410dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:layout_marginTop="140dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
             tools:ignore="MissingConstraints">
-
-            <Switch
-                android:id="@+id/swt_termos"
-                android:layout_width="217dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="18dp"
-                android:text="Aceitar termos de uso"
-                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/bt_cadastrar"

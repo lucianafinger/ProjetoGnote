@@ -1,16 +1,15 @@
 
 package com.example.projetognote.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projetognote.R;
 import com.example.projetognote.RetrofitBuilder;
@@ -27,7 +26,9 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etSenha;
     private Button btLogar;
     private TextView tvEsqueceuSenha;
+    private Usuario user;
     private UsuarioService usuarioService;  // AJR - Gnote - 15/05/2021
+    public static Usuario usuariologado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,33 +43,27 @@ public class LoginActivity extends AppCompatActivity {
                 // BEGIN of AJR - Gnote - 15/05/2021
                 // verificar e passar p proxima tela
 
-
                 String email = etEmail.getText().toString();
                 String senha = etSenha.getText().toString();
 
-                usuarioService.loginsenha(email, senha).enqueue(new Callback<Usuario>() {
+                usuarioService.login(email, senha).enqueue(new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Login Top", Toast.LENGTH_LONG).show();
+                        if (response.isSuccessful()){
+                            usuariologado = response.body();
+                            Toast.makeText(getApplicationContext(), "Bem vindo", Toast.LENGTH_LONG).show();
                             startActivity(new Intent(LoginActivity.this, ControleActivity.class));
-                        } else {
-                            Log.i("DEBUG", response.message().toString());
-                            Log.i("DEBUG", response.errorBody().toString());
-                            Toast.makeText(getApplicationContext(), "Erro no login" + response.message().toString(), Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Erro no login. Verifique email e senha!", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
-                        Log.i("DEBUG", t.getMessage());
-                        Toast.makeText(getApplicationContext(), "Não foi possível cadastrar. O servidor está fora, por favor tente mais tarde.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Não foi possível efetuar login. O servidor está fora, por favor tente mais tarde." + t.getMessage(), Toast.LENGTH_LONG).show();
 
                     }
                 });
-
-
-                // se nao, tente novamente
 
             }
         });
@@ -92,3 +87,5 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 }
+
+

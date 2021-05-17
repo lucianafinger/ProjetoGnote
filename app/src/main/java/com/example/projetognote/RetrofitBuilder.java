@@ -7,7 +7,7 @@ public class RetrofitBuilder {
 
     public static Retrofit buildRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl("http://localhost:8090/")
+                .baseUrl("http://192.168.0.10:8090/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

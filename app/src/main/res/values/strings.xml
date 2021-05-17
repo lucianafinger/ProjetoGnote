@@ -19,5 +19,9 @@
     <string name="menu_logout">Logout</string>
     <string name="menu_contato">Fale conosco</string>
 
+    <string name="str_hipo">Glicose hipo:</string>
+    <string name="str_hiper">Glicose hiper:</string>
+    <string name="str_ideal_min">Intervalo ideal valor mínimo:</string>
+    <string name="str_ideal_max">Intervalo ideal valor máximo:</string>
 
 </resources>

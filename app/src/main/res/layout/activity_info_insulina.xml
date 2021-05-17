@@ -8,78 +8,146 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="409dp"
-        android:layout_height="300dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="264dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="1dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
-        <TextView
-            android:id="@+id/tv_hipo"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16sp"
-            android:text="Glicose hipo:"
-            android:textSize="16sp"
-            tools:ignore="MissingConstraints" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_hipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_hipo"
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_progress_hipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
 
         <SeekBar
             android:id="@+id/sb_hipo"
             android:layout_width="317dp"
             android:layout_height="24dp"
-            android:layout_gravity="center"
             android:layout_marginTop="16sp"
+            android:max="220"
+            android:min="0"
             tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/tv_hiper"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16sp"
-            android:text="Glicose hiper:"
-            android:textSize="16sp"
-            tools:ignore="MissingConstraints" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_hiper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_hiper"
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_progress_hiper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
 
         <SeekBar
             android:id="@+id/sb_hiper"
             android:layout_width="317dp"
             android:layout_height="24dp"
-            android:layout_gravity="center"
             android:layout_marginTop="16sp"
+            android:max="220"
+            android:min="0"
             tools:ignore="MissingConstraints" />
 
-        <TextView
-            android:id="@+id/tv_ideal"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16sp"
-            android:text="Intervalo ideal glicose:"
-            android:textSize="16sp"
-            tools:ignore="MissingConstraints" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_ideal_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_ideal_min"
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_progress_ideal_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
 
         <SeekBar
             android:id="@+id/sb_ideal_min"
             android:layout_width="317dp"
             android:layout_height="24dp"
-            android:layout_gravity="center"
             android:layout_marginTop="16sp"
+            android:max="220"
+            android:min="0"
             tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_ideal_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_ideal_max"
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/tv_progress_ideal_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp"
+                tools:ignore="MissingConstraints" />
+
+        </LinearLayout>
 
         <SeekBar
             android:id="@+id/sb_ideal_max"
             android:layout_width="317dp"
             android:layout_height="24dp"
-            android:layout_gravity="center"
             android:layout_marginTop="16sp"
+            android:max="220"
+            android:min="0"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
 
@@ -88,8 +156,8 @@
         android:layout_width="361dp"
         android:layout_height="234dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="38dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/bt_registrar_insulina"
         app:layout_constraintEnd_toEndOf="parent"
