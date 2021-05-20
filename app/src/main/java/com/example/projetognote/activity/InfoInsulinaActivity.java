@@ -109,7 +109,6 @@ public class InfoInsulinaActivity extends AppCompatActivity {
         this.btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Bem vindo(a): " + usuario.getNome(), Toast.LENGTH_LONG).show();
 
                 // retorna o valor exato
 //                System.out.println("hiper:" + usuario.getHiperglicemia() + " hipo:" + usuario.getHipoglicemia());
@@ -125,7 +124,7 @@ public class InfoInsulinaActivity extends AppCompatActivity {
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(InfoInsulinaActivity.this, ControleActivity.class));
+                            startActivity(new Intent(InfoInsulinaActivity.this, LoginActivity.class));
                             finish();
                         } else {
                             Log.i("DEBUG", response.message());

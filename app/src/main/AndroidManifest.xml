@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.projetognote">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -7,15 +8,17 @@
     <application
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icone_gnote"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icone_gnote"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetoGnote">
         <activity android:name=".activity.InfoInsulinaActivity"></activity>
         <activity android:name=".activity.AdicionarRegistroActivity" />
-        <activity android:name=".fragments.PerfilFragment" />
-        <activity android:name=".fragments.MensalFragment" />
+        <activity android:name=".fragments.PerfilFragment"
+            tools:ignore="Instantiatable" />
+        <activity android:name=".fragments.MensalFragment"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".activity.ControleActivity"
             android:label="@string/title_activity_controle"

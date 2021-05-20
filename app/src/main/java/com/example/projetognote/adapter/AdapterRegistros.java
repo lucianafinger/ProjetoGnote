@@ -20,6 +20,8 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
     private List<Registro> listaRegistros;
     private OnRegistroListener registroListener;
 
+    private Registro registro;
+
     public AdapterRegistros(List<Registro> listaRegistros, OnRegistroListener onRegistroListener) {
         this.listaRegistros = listaRegistros;
         this.registroListener = onRegistroListener;
@@ -41,6 +43,7 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
         holder.glicose.setText(registro.getRegistroGlicose());
         holder.insulinaFixa.setText((int) registro.getInsulinaFixa());
         holder.insulinaCorrecao.setText((int) registro.getInsulinaCorrecao());
+
 
     }
 
@@ -68,6 +71,21 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
 
             this.onRegistroListener = onRegistroListener;
             itemView.setOnClickListener(this);
+
+            // 1 hipo; 2 bom; 3 hiper
+            if(registro.getEtiqueta() == String.valueOf(2)){
+                // bom
+                etiqueta.setImageResource(R.drawable.muito_boa);
+            }else if(registro.getEtiqueta() == String.valueOf(1)){
+                // hipo
+                etiqueta.setImageResource(R.drawable.hipo);
+            }else if(registro.getEtiqueta() == String.valueOf(3)){
+                // hiper
+                etiqueta.setImageResource(R.drawable.hiper);
+            }else{
+                // normal - imagem padrão
+                etiqueta.setImageResource(R.drawable.boa_normal);
+            }
         }
 
         @Override
