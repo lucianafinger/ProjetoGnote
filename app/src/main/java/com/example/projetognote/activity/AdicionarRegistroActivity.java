@@ -1,6 +1,8 @@
 package com.example.projetognote.activity;
 
+import android.graphics.RegionIterator;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +17,11 @@ import com.example.projetognote.model.Registro;
 import com.example.projetognote.model.Usuario;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.sql.Date;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,8 +34,13 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
     private Button btRegistrar;
 
     private Registro registro;
-    Usuario usuario = LoginActivity.usuariologado;
     private RegistroService registroService;
+
+    private Usuario usuario;
+
+
+    DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm:ss");
+    SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +48,34 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adicionar_registro);
 
         this.inicializaComponentes();
-
+        this.usuario = LoginActivity.usuariologado;
+//        System.out.println("user" + usuario.getNome());
+        this.registro = new Registro();
 
         btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Date dataUtil = (Date) new java.util.Date();
-//                Date dataSql = new java.sql.Date(dataUtil.getTime());
-//
-//                registro.setData_registro(dataSql);
-                registro.setHoraRegistro(Time.valueOf(etHora.getText().toString()));
+                java.sql.Date data_registro = java.sql.Date.valueOf(data.format( new Date(System.currentTimeMillis())));
+                registro.setData_registro(data_registro);
+//                System.out.println(data_registro);
+                registro.setData_registro(data_registro);
+                registro.setHoraRegistro(LocalTime.parse(etHora.getText().toString(),hora));
+
+                System.out.println(registro.getHoraRegistro());
+
+                registro.setHoraRegistro(null);
                 registro.setRegistroGlicose(Integer.parseInt(etGlicose.getText().toString()));
                 registro.setInsulinaFixa(Double.parseDouble(etInsulinaRefeicao.getText().toString()));
                 registro.setInsulinaCorrecao(Double.parseDouble(etInsulinaCorrecao.getText().toString()));
+
                 registro.setUsuario(usuario);
                 etiqueta();
 
+                System.out.println(registro.getEtiqueta());
+                System.out.println(usuario.getId_usuario());
+                System.out.println("insulina correcao: " +registro.getInsulinaCorrecao() + " insulina fixa: " + registro.getInsulinaFixa());
+
+                System.out.print( registro.toString());
                 registroService.adicionarRegistro(registro).enqueue(new Callback<Registro>() {
                     @Override
                     public void onResponse(Call<Registro> call, Response<Registro> response) {
@@ -60,6 +83,8 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso", Toast.LENGTH_LONG).show();
                         }else{
                             Toast.makeText(getApplicationContext(), "Erro ao adicionar registro", Toast.LENGTH_LONG).show();
+                            Log.i("DEBUG", response.message().toString());
+                            Log.i("DEBUG", response.errorBody().toString());
 
                         }
                     }
@@ -79,17 +104,19 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
     }
 
     private void inicializaComponentes() {
-        txtHora = findViewById(R.id.txt_hora);
-        txtGlicose = findViewById(R.id.txt_glicose);
-        txtInsulinaRefeicao = findViewById(R.id.txt_insulina_refeicao);
-        txtInsulinaCorrecao = findViewById(R.id.txt_insulina_correcao);
+        this.txtHora = findViewById(R.id.txt_hora);
+        this.txtGlicose = findViewById(R.id.txt_glicose);
+        this.txtInsulinaRefeicao = findViewById(R.id.txt_insulina_refeicao);
+        this.txtInsulinaCorrecao = findViewById(R.id.txt_insulina_correcao);
 
-        etHora = findViewById(R.id.et_hora);
-        etGlicose = findViewById(R.id.et_glicose);
-        etInsulinaRefeicao = findViewById(R.id.et_insulina_refeicao);
-        etInsulinaCorrecao = findViewById(R.id.et_insulina_correcao);
+        this.etHora = findViewById(R.id.et_hora);
+        this.etGlicose = findViewById(R.id.et_glicose);
+        this.etInsulinaRefeicao = findViewById(R.id.et_insulina_refeicao);
+        this.etInsulinaCorrecao = findViewById(R.id.et_insulina_correcao);
 
-        btRegistrar = findViewById(R.id.bt_registrar);
+        registro = new Registro();
+
+        this.btRegistrar = findViewById(R.id.bt_registrar);
         this.registroService = RetrofitBuilder.buildRetrofit().create(RegistroService.class); // AJR - Gnote - 15/05/2021
     }
 
@@ -109,6 +136,3 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
 
     }
 }
-
-
-

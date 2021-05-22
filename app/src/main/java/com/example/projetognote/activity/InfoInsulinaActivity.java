@@ -26,7 +26,7 @@ public class InfoInsulinaActivity extends AppCompatActivity {
 
     private SeekBar sbHipo, sbHiper, sbIdealMin, sbIdealMax;
     private TextInputLayout txtGlicose, txtIntervalo, txtDoseInsulina;
-    private EditText etGlicose, etIntervalo, etDoseInsulina;
+    private EditText etGlicoseInicial, etIntervalo, etDoseInsulina;
     private Button btRegistrar;
 
     private TextView tvProgressHipo, tvProgressHiper, tvProgressIdealMin, tvProgressIdealMax;
@@ -109,31 +109,22 @@ public class InfoInsulinaActivity extends AppCompatActivity {
         this.btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Bem vindo(a): " + usuario.getNome(), Toast.LENGTH_LONG).show();
 
                 // retorna o valor exato
-                System.out.println("hiper:" + usuario.getHiperglicemia() + " hipo:" + usuario.getHipoglicemia());
+//                System.out.println("hiper:" + usuario.getHiperglicemia() + " hipo:" + usuario.getHipoglicemia());
 
-                // insulina - não está setando estes valores apenas, da erro ao executar e salvar usuario,
-                // porém os dados do seekbar estão salvando normal assim como os dados do cadastro: senha, email e nome
-                // obs: já tentei valueOf tbm
-
-//                usuario.setCorrecaoHgt(Integer.valueOf(etGlicose.getText().toString()));
-//                usuario.setIntervalo(Integer.valueOf(etIntervalo.getText().toString()));
-//                usuario.setInsulina(Double.valueOf(etDoseInsulina.getText().toString()));
-
-                usuario.setCorrecaoHgt(Integer.parseInt(etGlicose.getText().toString()));
+                usuario.setCorrecaoHgt(Integer.parseInt(etGlicoseInicial.getText().toString()));
                 usuario.setIntervalo(Integer.parseInt(etIntervalo.getText().toString()));
                 usuario.setInsulina(Double.parseDouble(etDoseInsulina.getText().toString()));
 
-                System.out.println(" correcao hgt: " + usuario.getCorrecaoHgt() + " intervalo: " + usuario.getIntervalo() + " insulina " + usuario.getInsulina());
+//                System.out.println(" correcao hgt: " + usuario.getCorrecaoHgt() + " intervalo: " + usuario.getIntervalo() + " insulina " + usuario.getInsulina());
 
                 usuarioService.adicionar(usuario).enqueue(new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         if (response.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(InfoInsulinaActivity.this, ControleActivity.class));
+                            startActivity(new Intent(InfoInsulinaActivity.this, LoginActivity.class));
                             finish();
                         } else {
                             Log.i("DEBUG", response.message());
@@ -160,11 +151,11 @@ public class InfoInsulinaActivity extends AppCompatActivity {
         sbIdealMax = findViewById(R.id.sb_ideal_max);
         btRegistrar = findViewById(R.id.bt_registrar_insulina);
 
+        txtGlicose = findViewById(R.id.txt_glicose_inicial);
         txtDoseInsulina = findViewById(R.id.txt_dose_intervalo);
-        txtGlicose = findViewById(R.id.txt_glicose);
         txtIntervalo = findViewById(R.id.txt_intervalo_glicose);
 
-        etGlicose = findViewById(R.id.et_glicose);
+        etGlicoseInicial = findViewById(R.id.et_glicose_inicial);
         etDoseInsulina = findViewById(R.id.et_dose_intervalo);
         etIntervalo = findViewById(R.id.et_intervalo_glicose);
 

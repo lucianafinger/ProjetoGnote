@@ -1,4 +1,3 @@
-
 package com.example.projetognote.activity;
 
 import android.content.Intent;
@@ -50,11 +49,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         if (response.isSuccessful()){
-                            usuariologado = response.body();
-                            Toast.makeText(getApplicationContext(), "Bem vindo", Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(LoginActivity.this, ControleActivity.class));
-                        }else{
-                            Toast.makeText(getApplicationContext(), "Erro no login. Verifique email e senha!", Toast.LENGTH_LONG).show();
+                            if (response.body() == null){
+                                Toast.makeText(getApplicationContext(), "Erro ao efetuar login", Toast.LENGTH_LONG).show();
+                            }else {
+                                usuariologado = response.body();
+                                Toast.makeText(getApplicationContext(), "Bem vindo", Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(LoginActivity.this, ControleActivity.class));
+                            }
+                        }else {
+                            Toast.makeText(getApplicationContext(), "Erro no login. Verifique email e senha!" + response.message(), Toast.LENGTH_LONG).show();
                         }
                     }
 
@@ -87,5 +90,3 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 }
-
-

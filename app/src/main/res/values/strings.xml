@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProjetoGnote</string>
+    <string name="app_name">Gnote</string>
 
     <string name="str_email">E-mail</string>
     <string name="str_nome">Nome</string>

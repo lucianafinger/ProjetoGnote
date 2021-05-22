@@ -11,18 +11,14 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface UsuarioService {
     @POST("usuarios")
     Call<Usuario> adicionar(@Body Usuario usuario);
 
-    @GET("/loginsenha/{email}/{senha}")
-    Call<Usuario> loginsenha(@Path("email") String email, @Path("senha") String senha);
-
-    @POST("usuarios/login/{email}/{senha}")
-    Call<Usuario> login(@Path("email") String email, @Path("senha") String senha);
-//    @POST("usuario/login")
-//    Call<Usuario> login(@RequestParam String email, @RequestParam String senha);
+    @POST("usuarios/login")
+    Call<Usuario> login(@Query("email") String email, @Query("senha") String senha);
 
     @GET("usuarios")
     Call<List<Usuario>> listarUsuario();
