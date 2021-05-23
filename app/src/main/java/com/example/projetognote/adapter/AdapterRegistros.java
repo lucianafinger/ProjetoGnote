@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projetognote.R;
 import com.example.projetognote.model.Registro;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyViewHolder> {
@@ -22,9 +23,11 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
 
     private Registro registro;
 
-    public AdapterRegistros(List<Registro> listaRegistros, OnRegistroListener onRegistroListener) {
+    DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm:ss");
+
+    public AdapterRegistros(List<Registro> listaRegistros) {
         this.listaRegistros = listaRegistros;
-        this.registroListener = onRegistroListener;
+//        this.registroListener = onRegistroListener;
     }
 
     @NonNull
@@ -38,31 +41,35 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        //recupera os dados
         Registro registro = listaRegistros.get(position);
-//        holder.hora.setText(registro.getHoraRegistro());
+//        holder.hora.setText(registro.getHoraRegistro().format(hora));
         holder.glicose.setText(registro.getRegistroGlicose());
-        holder.insulinaFixa.setText((int) registro.getInsulinaFixa());
+        holder.insulinaFixa.setText((int) registro.getInsulinaRefeicao());
         holder.insulinaCorrecao.setText((int) registro.getInsulinaCorrecao());
-
 
     }
 
     // quantidade de itens que vai retornar do ViewHolder
     @Override
     public int getItemCount() {
-        return this.listaRegistros.size();
+        if(listaRegistros == null){
+
+        }else{
+            return this.listaRegistros.size();
+        }
+        return 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView etiqueta;
-        private TextView data, hora, glicose, insulinaFixa, insulinaCorrecao;
+        private TextView hora, glicose, insulinaFixa, insulinaCorrecao;
         OnRegistroListener onRegistroListener;
 
         public MyViewHolder(@NonNull View itemView, OnRegistroListener onRegistroListener) {
             super(itemView);
 
-            data = itemView.findViewById(R.id.tv_data);
             hora = itemView.findViewById(R.id.tv_hora);
             glicose = itemView.findViewById(R.id.tv_glicose);
             insulinaFixa = itemView.findViewById(R.id.tv_insulina_refeicao);
@@ -72,26 +79,26 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
             this.onRegistroListener = onRegistroListener;
             itemView.setOnClickListener(this);
 
-            // 1 hipo; 2 bom; 3 hiper
-            if(registro.getEtiqueta() == String.valueOf(2)){
-                // bom
-                etiqueta.setImageResource(R.drawable.muito_boa);
-            }else if(registro.getEtiqueta() == String.valueOf(1)){
-                // hipo
-                etiqueta.setImageResource(R.drawable.hipo);
-            }else if(registro.getEtiqueta() == String.valueOf(3)){
-                // hiper
-                etiqueta.setImageResource(R.drawable.hiper);
-            }else{
-                // normal - imagem padrão
-                etiqueta.setImageResource(R.drawable.boa_normal);
-            }
+//            // 1 hipo; 2 bom; 3 hiper
+//            if(registro.getEtiqueta() == String.valueOf(2)){
+//                // bom
+//                etiqueta.setImageResource(R.drawable.muito_boa);
+//            }else if(registro.getEtiqueta() == String.valueOf(1)){
+//                // hipo
+//                etiqueta.setImageResource(R.drawable.hipo);
+//            }else if(registro.getEtiqueta() == String.valueOf(3)){
+//                // hiper
+//                etiqueta.setImageResource(R.drawable.hiper);
+//            }else{
+//                // normal - imagem padrão
+//                etiqueta.setImageResource(R.drawable.boa_normal);
+//            }
+
         }
 
         @Override
         public void onClick(View v) {
             onRegistroListener.onRegistroClick(getAdapterPosition());
-
         }
     }
 

@@ -74,8 +74,6 @@ public class InfoInsulinaActivity extends AppCompatActivity {
             }
         });
 
-
-
         this.sbIdealMin.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -109,15 +107,11 @@ public class InfoInsulinaActivity extends AppCompatActivity {
         this.btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // retorna o valor exato
-//                System.out.println("hiper:" + usuario.getHiperglicemia() + " hipo:" + usuario.getHipoglicemia());
+                Toast.makeText(getApplicationContext(), "Bem vindo(a): " + usuario.getNome(), Toast.LENGTH_LONG).show();
 
                 usuario.setCorrecaoHgt(Integer.parseInt(etGlicoseInicial.getText().toString()));
                 usuario.setIntervalo(Integer.parseInt(etIntervalo.getText().toString()));
                 usuario.setInsulina(Double.parseDouble(etDoseInsulina.getText().toString()));
-
-//                System.out.println(" correcao hgt: " + usuario.getCorrecaoHgt() + " intervalo: " + usuario.getIntervalo() + " insulina " + usuario.getInsulina());
 
                 usuarioService.adicionar(usuario).enqueue(new Callback<Usuario>() {
                     @Override

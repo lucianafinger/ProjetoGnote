@@ -5,31 +5,30 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalTime;
 
 public class Registro  implements Serializable, Parcelable {
     private long idRegistro;
     private int registroGlicose;
     private Date data_registro;
-    private LocalTime horaRegistro;
+//    private LocalTime horaRegistro;
     private String etiqueta;
-    private double insulinaCorrecao, insulinaFixa;
+    private double insulinaCorrecao, insulinaRefeicao;
 
     private Usuario usuario;
 
     public Registro() {
     }
 
-    public Registro(long idRegistro, int registroGlicose, Date dataRegistro, LocalTime horaRegistro,
-                    String etiqueta, double insulinaCorrecao, double insulinaFixa, Usuario usuario) {
+    public Registro(long idRegistro, int registroGlicose, Date dataRegistro,
+                    String etiqueta, double insulinaCorrecao, double insulinaRefeicao, Usuario usuario) {
         this.idRegistro = idRegistro;
         this.registroGlicose = registroGlicose;
         this.data_registro = dataRegistro;
-        this.horaRegistro = horaRegistro;
+//        this.horaRegistro = horaRegistro;
         this.etiqueta = etiqueta;
         this.insulinaCorrecao = insulinaCorrecao;
-        this.insulinaFixa = insulinaFixa;
+        this.insulinaRefeicao = insulinaRefeicao;
         this.usuario = usuario;
     }
 
@@ -38,7 +37,7 @@ public class Registro  implements Serializable, Parcelable {
         registroGlicose = in.readInt();
         etiqueta = in.readString();
         insulinaCorrecao = in.readDouble();
-        insulinaFixa = in.readDouble();
+        insulinaRefeicao = in.readDouble();
         usuario = in.readParcelable(Usuario.class.getClassLoader());
     }
 
@@ -78,13 +77,13 @@ public class Registro  implements Serializable, Parcelable {
         this.data_registro = data_registro;
     }
 
-    public LocalTime getHoraRegistro() {
-        return horaRegistro;
-    }
-
-    public void setHoraRegistro(LocalTime horaRegistro) {
-        this.horaRegistro = horaRegistro;
-    }
+//    public LocalTime getHoraRegistro() {
+//        return horaRegistro;
+//    }
+//
+//    public void setHoraRegistro(LocalTime horaRegistro) {
+//        this.horaRegistro = horaRegistro;
+//    }
 
     public String getEtiqueta() {
         return etiqueta;
@@ -102,12 +101,12 @@ public class Registro  implements Serializable, Parcelable {
         this.insulinaCorrecao = insulinaCorrecao;
     }
 
-    public double getInsulinaFixa() {
-        return insulinaFixa;
+    public double getInsulinaRefeicao() {
+        return insulinaRefeicao;
     }
 
-    public void setInsulinaFixa(double insulinaRefeicao) {
-        this.insulinaFixa = insulinaRefeicao;
+    public void setInsulinaRefeicao(double insulinaRefeicao) {
+        this.insulinaRefeicao = insulinaRefeicao;
     }
 
     public Usuario getUsuario() {
@@ -123,15 +122,13 @@ public class Registro  implements Serializable, Parcelable {
         return "Registro{" +
                 "registroGlicose=" + registroGlicose +
                 ", data_registro=" + data_registro +
-                ", horaRegistro=" + horaRegistro +
+//                ", horaRegistro=" + horaRegistro +
                 ", etiqueta='" + etiqueta + '\'' +
                 ", insulinaCorrecao=" + insulinaCorrecao +
-                ", insulinaFixa=" + insulinaFixa +
+                ", insulinaFixa=" + insulinaRefeicao +
                 "usuario= " + usuario.toString() +
                 '}';
     }
-
-
 
     @Override
     public int describeContents() {
@@ -144,7 +141,7 @@ public class Registro  implements Serializable, Parcelable {
         dest.writeInt(registroGlicose);
         dest.writeString(etiqueta);
         dest.writeDouble(insulinaCorrecao);
-        dest.writeDouble(insulinaFixa);
+        dest.writeDouble(insulinaRefeicao);
         dest.writeParcelable(usuario, flags);
     }
 }

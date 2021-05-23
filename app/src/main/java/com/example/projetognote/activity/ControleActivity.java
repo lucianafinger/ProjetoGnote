@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.projetognote.R;
+import com.example.projetognote.RegistroService;
+import com.example.projetognote.RetrofitBuilder;
+import com.example.projetognote.UsuarioService;
 import com.example.projetognote.fragments.PerfilFragment;
 import com.example.projetognote.model.Usuario;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,13 +29,6 @@ public class ControleActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private NavigationView navigationView;
     private NavController navController;
-
-//    public static Usuario USUARIO = new Usuario();
-//
-//    static {
-//        USUARIO.setNome("Joao da Silva");
-//    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +71,6 @@ public class ControleActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        System.out.println("teste");
+        System.out.println("on resume");
     }
 }

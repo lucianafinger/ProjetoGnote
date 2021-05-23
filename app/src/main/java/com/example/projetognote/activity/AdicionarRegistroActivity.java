@@ -1,6 +1,6 @@
 package com.example.projetognote.activity;
 
-import android.graphics.RegionIterator;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,13 +15,16 @@ import com.example.projetognote.RegistroService;
 import com.example.projetognote.RetrofitBuilder;
 import com.example.projetognote.model.Registro;
 import com.example.projetognote.model.Usuario;
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,8 +41,10 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
 
     private Usuario usuario;
 
+    public static List<Registro> listaReg = new ArrayList<Registro>();
 
-    DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm:ss");
+    DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm");
+    @SuppressLint("SimpleDateFormat")
     SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
@@ -48,34 +53,41 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_adicionar_registro);
 
         this.inicializaComponentes();
-        this.usuario = LoginActivity.usuariologado;
-//        System.out.println("user" + usuario.getNome());
+        this.usuario = LoginActivity.usuarioLogado;
+
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("NN:NN");
+        MaskTextWatcher mtw = new MaskTextWatcher(etHora, smf);
+        etHora.addTextChangedListener(mtw);
+
         this.registro = new Registro();
 
         btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                java.sql.Date data_registro = java.sql.Date.valueOf(data.format( new Date(System.currentTimeMillis())));
+                java.sql.Date data_registro = java.sql.Date.valueOf(data.format(new Date(System.currentTimeMillis())));
                 registro.setData_registro(data_registro);
-//                System.out.println(data_registro);
-                registro.setData_registro(data_registro);
-                registro.setHoraRegistro(LocalTime.parse(etHora.getText().toString(),hora));
+//                registro.setHoraRegistro(LocalTime.parse(etHora.getText().toString(),hora));
 
-                System.out.println(registro.getHoraRegistro());
+//                System.out.println(registro.getHoraRegistro());
 
-                registro.setHoraRegistro(null);
+                // *************************
+                // registro.setHoraRegistro(null);
+
                 registro.setRegistroGlicose(Integer.parseInt(etGlicose.getText().toString()));
-                registro.setInsulinaFixa(Double.parseDouble(etInsulinaRefeicao.getText().toString()));
+                registro.setInsulinaRefeicao(Double.parseDouble(etInsulinaRefeicao.getText().toString()));
                 registro.setInsulinaCorrecao(Double.parseDouble(etInsulinaCorrecao.getText().toString()));
 
                 registro.setUsuario(usuario);
+
                 etiqueta();
 
                 System.out.println(registro.getEtiqueta());
-                System.out.println(usuario.getId_usuario());
-                System.out.println("insulina correcao: " +registro.getInsulinaCorrecao() + " insulina fixa: " + registro.getInsulinaFixa());
+                System.out.println(usuario.getIdUsuario());
+                System.out.println("insulina correcao: " +registro.getInsulinaCorrecao() + " insulina fixa: " + registro.getInsulinaRefeicao());
 
-                System.out.print( registro.toString());
+                System.out.print(registro.toString());
+                System.out.println(usuario.toString());
+
                 registroService.adicionarRegistro(registro).enqueue(new Callback<Registro>() {
                     @Override
                     public void onResponse(Call<Registro> call, Response<Registro> response) {
@@ -91,8 +103,8 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Registro> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Não foi possível efetuar login. O servidor está fora, por favor tente mais tarde." + t.getMessage(), Toast.LENGTH_LONG).show();
-
+                        Toast.makeText(getApplicationContext(), "Erro no registro: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        t.printStackTrace();
                     }
                 });
 
@@ -117,6 +129,7 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         registro = new Registro();
 
         this.btRegistrar = findViewById(R.id.bt_registrar);
+
         this.registroService = RetrofitBuilder.buildRetrofit().create(RegistroService.class); // AJR - Gnote - 15/05/2021
     }
 
@@ -132,7 +145,6 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         } else if (glicose >= usuario.getIdealMinima() && glicose <= usuario.getIdealMaxima()) {
             registro.setEtiqueta("2");
         }
-
 
     }
 }

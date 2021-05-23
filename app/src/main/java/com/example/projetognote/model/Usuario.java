@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario implements Serializable, Parcelable {
-    private long id_usuario;
+    private long idUsuario;
     private String nome, email, senha;
     private int correcaoHgt, hipoglicemia, hiperglicemia, idealMinima, idealMaxima, intervalo;
     private double insulina;
@@ -21,7 +21,7 @@ public class Usuario implements Serializable, Parcelable {
     public Usuario(long idUsuario, String nome, String email, String senha,
                    int correcaoHgt, int hipoglicemia, int hiperglicemia, int idealMinima, int idealMaxima,
                    int intervalo, double insulina, List<Registro> registros) {
-        this.id_usuario = idUsuario;
+        this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -36,7 +36,7 @@ public class Usuario implements Serializable, Parcelable {
     }
 
     protected Usuario(Parcel in) {
-        id_usuario = in.readLong();
+        idUsuario = in.readLong();
         nome = in.readString();
         email = in.readString();
         senha = in.readString();
@@ -48,18 +48,6 @@ public class Usuario implements Serializable, Parcelable {
         intervalo = in.readInt();
         insulina = in.readDouble();
     }
-
-//    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
-//        @Override
-//        public Usuario createFromParcel(Parcel in) {
-//            return new Usuario(in);
-//        }
-//
-//        @Override
-//        public Usuario[] newArray(int size) {
-//            return new Usuario[size];
-//        }
-//    };
 
     public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
         @Override
@@ -73,12 +61,12 @@ public class Usuario implements Serializable, Parcelable {
         }
     };
 
-    public long getId_usuario() {
-        return id_usuario;
+    public long getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setId_usuario(long id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -179,7 +167,7 @@ public class Usuario implements Serializable, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id_usuario);
+        dest.writeLong(idUsuario);
         dest.writeString(nome);
         dest.writeString(email);
         dest.writeString(senha);

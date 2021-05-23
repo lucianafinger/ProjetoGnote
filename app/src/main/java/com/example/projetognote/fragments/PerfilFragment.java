@@ -42,7 +42,7 @@ public class PerfilFragment extends Fragment {
         this.et_email_editar = v.findViewById(R.id.et_email_editar);
         this.et_senha_atual_editar = v.findViewById(R.id.et_senha_atual_editar);
         this.et_nova_senha_editar = v.findViewById(R.id.et_nova_senha_editar);
-        this.usuario = LoginActivity.usuariologado;
+        this.usuario = LoginActivity.usuarioLogado;
         this.usuarioService = RetrofitBuilder.buildRetrofit().create(UsuarioService.class);
 
 
@@ -64,7 +64,7 @@ public class PerfilFragment extends Fragment {
                     usuario.setSenha(et_nova_senha_editar.getText().toString());
                 }
 
-                usuarioService.atualizar(usuario.getId_usuario(), usuario).enqueue(new Callback<Usuario>() {
+                usuarioService.atualizar(usuario.getIdUsuario(), usuario).enqueue(new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         if (response.isSuccessful()) {
@@ -86,7 +86,7 @@ public class PerfilFragment extends Fragment {
         this.btExcluir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usuarioService.deletar(usuario.getId_usuario()).enqueue(new Callback<Void>() {
+                usuarioService.deletar(usuario.getIdUsuario()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if (response.isSuccessful()) {

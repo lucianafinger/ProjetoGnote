@@ -5,13 +5,51 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_data"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:text="Data"
-        android:textAlignment="center" />
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_hora_texto"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Hora" />
+
+        <TextView
+            android:id="@+id/tv_glicose_texto"
+            android:layout_width="6dp"
+            android:layout_height="45dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="HGT" />
+
+        <TextView
+            android:id="@+id/tv_insulinafixa_texto"
+            android:layout_width="29dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Dose Fixa" />
+
+        <TextView
+            android:id="@+id/tv_insulinacorrecao_texto"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="Dose Correção" />
+
+        <TextView
+            android:id="@+id/tv_etiqueta_texto"
+            android:layout_width="75dp"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:text="Etiqueta" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +66,7 @@
 
         <TextView
             android:id="@+id/tv_glicose"
-            android:layout_width="37dp"
+            android:layout_width="35dp"
             android:layout_height="55dp"
             android:layout_weight="1"
             android:gravity="center"

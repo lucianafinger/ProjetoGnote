@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RegistroService {
     @POST("registro")
@@ -19,11 +20,14 @@ public interface RegistroService {
     @POST("registro/mes/{mes}")
     Call<List<Registro>> buscarMes( @Path("mes") int mes);
 
-    @POST("registro/dia/{dia}/{mes}")
-    Call<List<Registro>> buscarDia(@Path("dia")int dia, @Path("mes")int mes);
+//    @GET("registro?dia={dia}&mes={mes}&ano={ano}&id={id}")
+//    Call<List<Registro>> buscarDia(@Query("dia") int dia, @Query("mes") int mes, @Query("ano") int ano, @Query("id") long id);
+
+    @GET("registro")
+    Call<List<Registro>> buscarDia(@Query("dia") int dia, @Query("mes") int mes, @Query("ano") int ano, @Query("id") long id);
 
     @POST("registro/usuario/{id}")
-    Call<List<Registro>> buscarUSuario(@Path("id") long id );
+    Call<List<Registro>> buscarUsuario(@Path("id") long id );
 
     @GET("registro")
     Call<List<Registro>> listarRegistros();

@@ -2,6 +2,7 @@ package com.example.projetognote.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvEsqueceuSenha;
     private Usuario user;
     private UsuarioService usuarioService;  // AJR - Gnote - 15/05/2021
-    public static Usuario usuariologado;
+    public static Usuario usuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +53,10 @@ public class LoginActivity extends AppCompatActivity {
                             if (response.body() == null){
                                 Toast.makeText(getApplicationContext(), "Erro ao efetuar login", Toast.LENGTH_LONG).show();
                             }else {
-                                usuariologado = response.body();
+                                usuarioLogado = response.body();
                                 Toast.makeText(getApplicationContext(), "Bem vindo", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(LoginActivity.this, ControleActivity.class));
+                                finish();
                             }
                         }else {
                             Toast.makeText(getApplicationContext(), "Erro no login. Verifique email e senha!" + response.message(), Toast.LENGTH_LONG).show();
@@ -67,16 +69,15 @@ public class LoginActivity extends AppCompatActivity {
 
                     }
                 });
-
             }
         });
 
-        tvEsqueceuSenha.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // encaminha nova senha por e-mail já cadastrado
-            }
-        });
+//        tvEsqueceuSenha.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // encaminha nova senha por e-mail já cadastrado
+//            }
+//        });
         // END of AJR - Gnote - 15/05/2021
 
     }
