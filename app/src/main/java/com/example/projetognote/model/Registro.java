@@ -10,8 +10,8 @@ import java.time.LocalTime;
 public class Registro  implements Serializable, Parcelable {
     private long idRegistro;
     private int registroGlicose;
-    private Date data_registro;
-//    private LocalTime horaRegistro;
+    private Date dataRegistro;
+    private LocalTime horaRegistro;
     private String etiqueta;
     private double insulinaCorrecao, insulinaRefeicao;
 
@@ -20,12 +20,12 @@ public class Registro  implements Serializable, Parcelable {
     public Registro() {
     }
 
-    public Registro(long idRegistro, int registroGlicose, Date dataRegistro,
+    public Registro(long idRegistro, int registroGlicose, Date dataRegistro, LocalTime horaRegistro,
                     String etiqueta, double insulinaCorrecao, double insulinaRefeicao, Usuario usuario) {
         this.idRegistro = idRegistro;
         this.registroGlicose = registroGlicose;
-        this.data_registro = dataRegistro;
-//        this.horaRegistro = horaRegistro;
+        this.dataRegistro = dataRegistro;
+        this.horaRegistro = horaRegistro;
         this.etiqueta = etiqueta;
         this.insulinaCorrecao = insulinaCorrecao;
         this.insulinaRefeicao = insulinaRefeicao;
@@ -69,21 +69,21 @@ public class Registro  implements Serializable, Parcelable {
         this.registroGlicose = registroGlicose;
     }
 
-    public Date getData_registro() {
-        return data_registro;
+    public Date getDataRegistro() {
+        return dataRegistro;
     }
 
-    public void setData_registro(Date data_registro) {
-        this.data_registro = data_registro;
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 
-//    public LocalTime getHoraRegistro() {
-//        return horaRegistro;
-//    }
-//
-//    public void setHoraRegistro(LocalTime horaRegistro) {
-//        this.horaRegistro = horaRegistro;
-//    }
+    public LocalTime getHoraRegistro() {
+        return horaRegistro;
+    }
+
+    public void setHoraRegistro(LocalTime horaRegistro) {
+        this.horaRegistro = horaRegistro;
+    }
 
     public String getEtiqueta() {
         return etiqueta;
@@ -119,15 +119,11 @@ public class Registro  implements Serializable, Parcelable {
 
     @Override
     public String toString() {
-        return "Registro{" +
-                "registroGlicose=" + registroGlicose +
-                ", data_registro=" + data_registro +
-//                ", horaRegistro=" + horaRegistro +
-                ", etiqueta='" + etiqueta + '\'' +
-                ", insulinaCorrecao=" + insulinaCorrecao +
-                ", insulinaFixa=" + insulinaRefeicao +
-                "usuario= " + usuario.toString() +
-                '}';
+        return  "Glicose: " + registroGlicose +
+                ", Data: " + dataRegistro +
+                ", Hora: " + horaRegistro +
+                ", Insulina Correção: " + insulinaCorrecao +
+                ", insulina Fixa: " + insulinaRefeicao;
     }
 
     @Override

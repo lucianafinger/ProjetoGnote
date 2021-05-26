@@ -29,7 +29,11 @@
         android:id="@+id/nav_mensal"
         android:name="com.example.projetognote.fragments.MensalFragment"
         android:label="@string/menu_mensal"
-        tools:layout="@layout/fragment_mensal" />
+        tools:layout="@layout/fragment_mensal" >
+        <action
+            android:id="@+id/mensal_to_editar_registro"
+            app:destination="@id/nav_editar_registro" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_perfil"

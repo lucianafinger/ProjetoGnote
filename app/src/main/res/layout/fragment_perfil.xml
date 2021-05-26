@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="254dp"
+        android:layout_width="0dp"
         android:layout_height="149dp"
         android:layout_marginStart="5dp"
         android:layout_marginTop="16dp"
@@ -47,6 +47,7 @@
         android:layout_height="124dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
@@ -59,13 +60,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="411dp"
-        android:layout_height="181dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="66dp"
+        android:layout_width="383dp"
+        android:layout_height="173dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         tools:ignore="MissingConstraints">
@@ -77,12 +80,13 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="16dp"
             android:text="Alterar senha?"
+            android:textColor="@color/black"
             android:textSize="18sp"
             tools:ignore="MissingConstraints" />
 
         <EditText
             android:id="@+id/et_senha_atual_editar"
-            android:layout_width="367dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="22dp"
             android:layout_marginTop="16dp"
@@ -94,7 +98,7 @@
 
         <EditText
             android:id="@+id/et_nova_senha_editar"
-            android:layout_width="367dp"
+            android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginStart="22dp"
             android:layout_marginTop="16dp"
@@ -108,9 +112,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="410dp"
-        android:layout_height="160dp"
-        android:layout_marginBottom="70dp"
+        android:layout_width="0dp"
+        android:layout_height="101dp"
+        android:layout_marginBottom="140dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

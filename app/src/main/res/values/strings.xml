@@ -13,8 +13,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+<!--    strings do menu     -->
     <string name="menu_home_registros">Registros</string>
-    <string name="menu_mensal">Visão mensal PDF</string>
+    <string name="menu_mensal">Visão Mensal</string>
     <string name="menu_perfil">Perfil</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_contato">Fale conosco</string>
@@ -23,5 +24,10 @@
     <string name="str_hiper">Glicose hiper:</string>
     <string name="str_ideal_min">Intervalo ideal valor mínimo:</string>
     <string name="str_ideal_max">Intervalo ideal valor máximo:</string>
+
+<!--    cabeçalho editar/adicionar registro    -->
+    <string name="str_editar_reg">Editar Registro:</string>
+    <string name="str_adicionar_reg">Adicionar Registro:</string>
+    <string name="str_spinner_mes">Selecione o mês:</string>
 
 </resources>

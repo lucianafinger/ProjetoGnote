@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +37,7 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
     private TextInputLayout txtHora, txtGlicose, txtInsulinaRefeicao, txtInsulinaCorrecao;
     private EditText etHora, etGlicose, etInsulinaRefeicao, etInsulinaCorrecao;
     private Button btRegistrar;
+    private ImageButton imgVoltar;
 
     private Registro registro;
     private RegistroService registroService;
@@ -43,7 +46,7 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
 
     public static List<Registro> listaReg = new ArrayList<Registro>();
 
-    DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm");
+    DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm:ss");
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -55,7 +58,7 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         this.inicializaComponentes();
         this.usuario = LoginActivity.usuarioLogado;
 
-        SimpleMaskFormatter smf = new SimpleMaskFormatter("NN:NN");
+        SimpleMaskFormatter smf = new SimpleMaskFormatter("NN:NN:NN");
         MaskTextWatcher mtw = new MaskTextWatcher(etHora, smf);
         etHora.addTextChangedListener(mtw);
 
@@ -64,11 +67,9 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                java.sql.Date data_registro = java.sql.Date.valueOf(data.format(new Date(System.currentTimeMillis())));
-                registro.setData_registro(data_registro);
+                java.sql.Date dataReg = java.sql.Date.valueOf(data.format(new Date(System.currentTimeMillis())));
+                registro.setDataRegistro(dataReg);
 //                registro.setHoraRegistro(LocalTime.parse(etHora.getText().toString(),hora));
-
-//                System.out.println(registro.getHoraRegistro());
 
                 // *************************
                 // registro.setHoraRegistro(null);
@@ -84,7 +85,6 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                 System.out.println(registro.getEtiqueta());
                 System.out.println(usuario.getIdUsuario());
                 System.out.println("insulina correcao: " +registro.getInsulinaCorrecao() + " insulina fixa: " + registro.getInsulinaRefeicao());
-
                 System.out.print(registro.toString());
                 System.out.println(usuario.toString());
 
@@ -93,25 +93,28 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                     public void onResponse(Call<Registro> call, Response<Registro> response) {
                         if (response.isSuccessful()){
                             Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso", Toast.LENGTH_LONG).show();
+                            onBackPressed();
                         }else{
                             Toast.makeText(getApplicationContext(), "Erro ao adicionar registro", Toast.LENGTH_LONG).show();
-                            Log.i("DEBUG", response.message().toString());
                             Log.i("DEBUG", response.errorBody().toString());
-
                         }
                     }
-
                     @Override
                     public void onFailure(Call<Registro> call, Throwable t) {
                         Toast.makeText(getApplicationContext(), "Erro no registro: " + t.getMessage(), Toast.LENGTH_LONG).show();
                         t.printStackTrace();
                     }
                 });
-
-
             }
         });
 
+        imgVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // voltar tela anterior
+                onBackPressed();
+            }
+        });
 
     }
 
@@ -126,6 +129,7 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         this.etInsulinaRefeicao = findViewById(R.id.et_insulina_refeicao);
         this.etInsulinaCorrecao = findViewById(R.id.et_insulina_correcao);
 
+        this.imgVoltar = findViewById(R.id.img_voltar_adicionar_registro);
         registro = new Registro();
 
         this.btRegistrar = findViewById(R.id.bt_registrar);
@@ -145,6 +149,10 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         } else if (glicose >= usuario.getIdealMinima() && glicose <= usuario.getIdealMaxima()) {
             registro.setEtiqueta("2");
         }
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

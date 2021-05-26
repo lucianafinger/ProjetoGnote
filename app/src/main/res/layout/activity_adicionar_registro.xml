@@ -7,12 +7,50 @@
     android:orientation="vertical"
     tools:context=".activity.AdicionarRegistroActivity">
 
+    <ImageButton
+        android:id="@+id/img_voltar_adicionar_registro"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/ic_voltar"
+        android:backgroundTint="@color/blue_gnote"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/tv_titulo_adicionar_reg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/tv_titulo_adicionar_reg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="70dp"
+        android:gravity="center"
+        android:text="@string/str_adicionar_reg"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.142"
+        tools:ignore="MissingConstraints">
+
+    </TextView>
+
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="265dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="250dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -72,6 +110,15 @@
                             android:layout_marginTop="16dp"
                             android:hint="Insulina Correção" />
 
+                        <Button
+                            android:id="@+id/bt_registrar"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="200dp"
+                            android:background="@drawable/custom_button"
+                            android:text="Salvar" />
+
                     </com.google.android.material.textfield.TextInputLayout>
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.textfield.TextInputLayout>
@@ -79,17 +126,5 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-
-    <Button
-        android:id="@+id/bt_registrar"
-        android:layout_width="146dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:text="Salvar"
-        android:background="@drawable/custom_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

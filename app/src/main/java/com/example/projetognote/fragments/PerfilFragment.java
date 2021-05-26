@@ -53,33 +53,36 @@ public class PerfilFragment extends Fragment {
         this.btEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (et_senha_atual_editar.getText().toString().equals(usuario.getSenha())) {
+                    usuario.setNome(et_nome_editar.getText().toString());
+                    usuario.setEmail(et_email_editar.getText().toString());
+                    if (et_nova_senha_editar == null) {
+                        usuario.setSenha(et_senha_atual_editar.getText().toString());
+                    } else {
 
-                usuario.setNome(et_nome_editar.getText().toString());
-                usuario.setEmail(et_email_editar.getText().toString());
+                        usuario.setSenha(et_nova_senha_editar.getText().toString());
+                    }
 
-                if (et_nova_senha_editar == null) {
-                    usuario.setSenha(et_senha_atual_editar.getText().toString());
-                }else{
-
-                    usuario.setSenha(et_nova_senha_editar.getText().toString());
-                }
-
-                usuarioService.atualizar(usuario.getIdUsuario(), usuario).enqueue(new Callback<Usuario>() {
-                    @Override
-                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(getActivity(), "Usuario atualizado!", Toast.LENGTH_SHORT).show();
-                            et_senha_atual_editar.setText(usuario.getSenha());
-                            et_nova_senha_editar.setText("");
+                    usuarioService.atualizar(usuario.getIdUsuario(), usuario).enqueue(new Callback<Usuario>() {
+                        @Override
+                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(getActivity(), "Usuario atualizado!", Toast.LENGTH_SHORT).show();
+                                et_senha_atual_editar.setText(usuario.getSenha());
+                                et_nova_senha_editar.setText("");
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<Usuario> call, Throwable t) {
-                        Toast.makeText(getActivity(),"Não foi possível efetuar login. O servidor está fora, por favor tente mais tarde.",Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<Usuario> call, Throwable t) {
+                            Toast.makeText(getActivity(), "Não foi possível efetuar login. O servidor está fora, por favor tente mais tarde.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
+                } else {
+                    Toast.makeText(getActivity(), "Senha não corresponde com a cadastrada.", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
 
@@ -99,7 +102,7 @@ public class PerfilFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(getActivity(),"Não foi possível efetuar login. O servidor está fora, por favor tente mais tarde.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Não foi possível efetuar login. O servidor está fora, por favor tente mais tarde.", Toast.LENGTH_SHORT).show();
 
                     }
                 });

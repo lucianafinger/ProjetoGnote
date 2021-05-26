@@ -13,48 +13,48 @@ import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 
-    public class LocalTimeSerializer implements JsonDeserializer<LocalTime>, JsonSerializer<LocalTime>
+public class LocalTimeSerializer implements JsonDeserializer<LocalTime>, JsonSerializer<LocalTime>
+{
+
+    //        private static final DateTimeFormatter TIME_FORMAT = ISODateTimeFormat.timeNoMillis();
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern ("HH:mm:ss");
+
+    @Override
+    public LocalTime deserialize(final JsonElement je, final Type type,
+                                 final JsonDeserializationContext jdc) throws JsonParseException
     {
+        String dateAsString = je.toString();
 
-//        private static final DateTimeFormatter TIME_FORMAT = ISODateTimeFormat.timeNoMillis();
-            private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern ("HH:mm:ss");
+        dateAsString = dateAsString.replaceAll("\"", "");
 
-        @Override
-        public LocalTime deserialize(final JsonElement je, final Type type,
-                                     final JsonDeserializationContext jdc) throws JsonParseException
+        System.out.println("dateAsString " + dateAsString);
+
+        if (je.isJsonNull() || dateAsString.length() == 0)
         {
-            String dateAsString = je.toString();
-
-            dateAsString = dateAsString.replaceAll("\"", "");
-
-            System.out.println("dateAsString " + dateAsString);
-
-            if (je.isJsonNull() || dateAsString.length() == 0)
-            {
-                return null;
-            }
-            else
-            {
-                return LocalTime.parse (dateAsString);
+            return null;
+        }
+        else
+        {
+            return LocalTime.parse (dateAsString);
 //                return TIME_FORMAT.parseLocalTime(dateAsString);
 
-            }
         }
-
-        @Override
-        public JsonElement serialize(final LocalTime src, final Type typeOfSrc,
-                                     final JsonSerializationContext context)
-        {
-            String retVal;
-            if (src == null)
-            {
-                retVal = "";
-            }
-            else
-            {
-                retVal = TIME_FORMAT.format(src);
-            }
-            return new JsonPrimitive(retVal);
-        }
-
     }
+
+    @Override
+    public JsonElement serialize(final LocalTime src, final Type typeOfSrc,
+                                 final JsonSerializationContext context)
+    {
+        String retVal;
+        if (src == null)
+        {
+            retVal = "";
+        }
+        else
+        {
+            retVal = TIME_FORMAT.format(src);
+        }
+        return new JsonPrimitive(retVal);
+    }
+
+}
