@@ -50,17 +50,6 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
             holder.insulinaFixa.setText(String.valueOf(registro.getInsulinaRefeicao()));
             holder.insulinaCorrecao.setText(String.valueOf(registro.getInsulinaCorrecao()));
 
-            //clique
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Registro selecionado = listaRegistros.get(position);
-//
-//                    bundleDadosRegistro = new Bundle();
-//                    bundleDadosRegistro.putSerializable("registro", selecionado);
-//                    Navigation.findNavController(v).navigate(R.id.home_to_editar_registro, bundleDadosRegistro);
-//                }
-//            });
         }
 
     }

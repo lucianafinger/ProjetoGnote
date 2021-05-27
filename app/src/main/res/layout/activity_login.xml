@@ -80,6 +80,7 @@
             android:id="@+id/tv_esqueceu_senha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Esqueceu a senha?"
             android:textAlignment="center"
             android:textSize="16sp" />
