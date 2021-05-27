@@ -1,6 +1,7 @@
 package com.example.projetognote.adapter;
 
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetognote.R;
@@ -22,7 +24,9 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
     private OnRegistroListener registroListener;
 
     private Registro registro;
-    DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm:ss");
+    DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private Bundle bundleDadosRegistro;
+
 
     public AdapterRegistros(List<Registro> listaRegistros, OnRegistroListener onRegistroListener) {
         this.listaRegistros = listaRegistros;
@@ -39,26 +43,41 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         //recupera os dados
-        Registro registro = listaRegistros.get(position);
-        holder.hora.setText(registro.getHoraRegistro().format(hora));
-        holder.glicose.setText(registro.getRegistroGlicose());
-        holder.insulinaFixa.setText(String.valueOf(registro.getInsulinaRefeicao()));
-        holder.insulinaCorrecao.setText(String.valueOf(registro.getInsulinaCorrecao()));
+        registro = listaRegistros.get(position);
+        if (registro != null) {
+            holder.hora.setText(registro.getHoraRegistro().format(hora));
+            holder.glicose.setText(String.valueOf(registro.getRegistroGlicose()));
+            holder.insulinaFixa.setText(String.valueOf(registro.getInsulinaRefeicao()));
+            holder.insulinaCorrecao.setText(String.valueOf(registro.getInsulinaCorrecao()));
+
+            //clique
+//            holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Registro selecionado = listaRegistros.get(position);
+//
+//                    bundleDadosRegistro = new Bundle();
+//                    bundleDadosRegistro.putSerializable("registro", selecionado);
+//                    Navigation.findNavController(v).navigate(R.id.home_to_editar_registro, bundleDadosRegistro);
+//                }
+//            });
+        }
+
     }
 
     // quantidade de itens que vai retornar do ViewHolder
     @Override
     public int getItemCount() {
-        if(listaRegistros == null){
+        if (listaRegistros == null) {
             System.out.println("não foram encontrados registros.");
-        }else{
+        } else {
             System.out.println("retorna lista");
             return this.listaRegistros.size();
         }
         return 0;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView etiqueta;
         TextView hora, glicose, insulinaFixa, insulinaCorrecao;
@@ -75,22 +94,24 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
 
             this.onRegistroListener = onRegistroListener;
             itemView.setOnClickListener(this);
-
-            // confiigurar imagens etiqueta
-            // 1 hipo; 2 bom; 3 hiper
-            if(registro.getEtiqueta() == String.valueOf(2)){
-                // bom
-                etiqueta.setImageResource(R.drawable.muito_boa);
-            }else if(registro.getEtiqueta() == String.valueOf(1)){
-                // hipo
-                etiqueta.setImageResource(R.drawable.hipo);
-            }else if(registro.getEtiqueta() == String.valueOf(3)){
-                // hiper
-                etiqueta.setImageResource(R.drawable.hiper);
-            }else{
-                // normal - imagem padrão
-                etiqueta.setImageResource(R.drawable.boa_normal);
+            if (registro != null) {
+//                 confiigurar imagens etiqueta
+//                 1 hipo; 2 bom; 3 hiper
+                if (registro.getEtiqueta().equals(String.valueOf(2))) {
+                    // bom
+                    etiqueta.setImageResource(R.drawable.muito_boa);
+                } else if (registro.getEtiqueta().equals(String.valueOf(1))) {
+                    // hipo
+                    etiqueta.setImageResource(R.drawable.hipo);
+                } else if (registro.getEtiqueta().equals(String.valueOf(3))) {
+                    // hiper
+                    etiqueta.setImageResource(R.drawable.hiper);
+                } else {
+                    // normal - imagem padrão
+                    etiqueta.setImageResource(R.drawable.boa_normal);
+                }
             }
+
 
         }
 
@@ -100,7 +121,7 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
         }
     }
 
-    public interface OnRegistroListener{
+    public interface OnRegistroListener {
         void onRegistroClick(int position);
     }
 

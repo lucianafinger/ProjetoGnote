@@ -48,7 +48,7 @@ public class PerfilFragment extends Fragment {
 
         et_nome_editar.setText(usuario.getNome());
         et_email_editar.setText(usuario.getEmail());
-        et_senha_atual_editar.setText(usuario.getSenha());
+//        et_senha_atual_editar.setText(usuario.getSenha());
 
         this.btEditar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +56,7 @@ public class PerfilFragment extends Fragment {
                 if (et_senha_atual_editar.getText().toString().equals(usuario.getSenha())) {
                     usuario.setNome(et_nome_editar.getText().toString());
                     usuario.setEmail(et_email_editar.getText().toString());
+
                     if (et_nova_senha_editar == null) {
                         usuario.setSenha(et_senha_atual_editar.getText().toString());
                     } else {
@@ -68,7 +69,7 @@ public class PerfilFragment extends Fragment {
                         public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(getActivity(), "Usuario atualizado!", Toast.LENGTH_SHORT).show();
-                                et_senha_atual_editar.setText(usuario.getSenha());
+                                et_senha_atual_editar.setText("");
                                 et_nova_senha_editar.setText("");
                             }
                         }
@@ -78,6 +79,8 @@ public class PerfilFragment extends Fragment {
                             Toast.makeText(getActivity(), "Não foi possível efetuar login. O servidor está fora, por favor tente mais tarde.", Toast.LENGTH_SHORT).show();
                         }
                     });
+//                }else if(et_nova_senha_editar != null || et_senha_atual_editar.getText().toString().equals(et_nova_senha_editar.getText().toString())){
+//                    Toast.makeText(getActivity(), "Senha não corresponde com a cadastrada.", Toast.LENGTH_SHORT).show();
 
                 } else {
                     Toast.makeText(getActivity(), "Senha não corresponde com a cadastrada.", Toast.LENGTH_SHORT).show();
@@ -115,4 +118,3 @@ public class PerfilFragment extends Fragment {
 
 
 }
-

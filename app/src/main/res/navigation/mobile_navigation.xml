@@ -6,6 +6,11 @@
     app:startDestination="@+id/nav_home_registros">
 
     <fragment
+        android:id="@+id/nav_atualizar_dados"
+        android:name="com.example.projetognote.fragments.FragmentInsulina"
+        android:label="@string/menu_atualizar_dados"
+        tools:layout="@layout/fragment_insulina" />
+    <fragment
         android:id="@+id/nav_contato"
         android:name="com.example.projetognote.fragments.ContatoFragment"
         android:label="@string/menu_contato"

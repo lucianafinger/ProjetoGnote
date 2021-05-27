@@ -17,9 +17,14 @@
             android:icon="@drawable/ic_perfil"
             android:title="@string/menu_perfil" />
         <item
+            android:id="@+id/nav_atualizar_dados"
+            android:icon="@drawable/ic_dados_insulina"
+            android:title="@string/menu_atualizar_dados" />
+        <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/ic_voltar"
             android:title="@string/menu_logout" />
+
     </group>
 
     <item android:title="Contato">

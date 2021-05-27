@@ -39,9 +39,8 @@ public class EditarRegistroFragment extends Fragment {
     private Button btEditarRegistro, btExcluirRegistro;
     private RegistroService registroService;
     private Usuario usuario;
-    private ImageButton imgVoltar;
-    DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm:ss");
-    SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
+    private DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm:ss");
+    private SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,24 +49,21 @@ public class EditarRegistroFragment extends Fragment {
 
         registro = getArguments().getParcelable("registro");
 
+        System.out.println(registro.getIdRegistro());
+
         inicializaComponentes(v);
 
-//        registro = getActivity().getIntent().getExtras().getParcelable("registro");
-
-        usuario = LoginActivity.usuarioLogado;
-
         this.etHoraEditar.setText(registro.getHoraRegistro().format(hora));
-        this.etGlicoseEditar.setText(registro.getRegistroGlicose());
-        this.etInsulinaRefeicaoEditar.setText(Double.toString(registro.getInsulinaRefeicao()));
-        this.etInsulinaCorrecaoEditar.setText(Double.toString(registro.getInsulinaCorrecao()));
+        this.etGlicoseEditar.setText(String.valueOf(registro.getRegistroGlicose()));
+        this.etInsulinaRefeicaoEditar.setText(String.valueOf(registro.getInsulinaRefeicao()));
+        this.etInsulinaCorrecaoEditar.setText(String.valueOf(registro.getInsulinaCorrecao()));
 
         btEditarRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                java.sql.Date data_registro = java.sql.Date.valueOf(data.format( new Date(System.currentTimeMillis())));
-                registro.setDataRegistro(data_registro);
+//                java.sql.Date dataReg = java.sql.Date.valueOf(data.format(new Date(System.currentTimeMillis())));
+                registro.setDataRegistro(registro.getDataRegistro());
                 registro.setHoraRegistro(LocalTime.parse(etHoraEditar.getText().toString(),hora));
-//                registro.setHoraRegistro(null);
                 registro.setRegistroGlicose(Integer.parseInt(etGlicoseEditar.getText().toString()));
                 registro.setInsulinaRefeicao(Double.parseDouble(etInsulinaRefeicaoEditar.getText().toString()));
                 registro.setInsulinaCorrecao(Double.parseDouble(etInsulinaCorrecaoEditar.getText().toString()));
@@ -124,7 +120,6 @@ public class EditarRegistroFragment extends Fragment {
             }
         });
 
-
         return v;
 
     }
@@ -139,9 +134,10 @@ public class EditarRegistroFragment extends Fragment {
         this.etInsulinaRefeicaoEditar = v.findViewById(R.id.et_insulina_refeicao_editar);
         this.etInsulinaCorrecaoEditar= v.findViewById(R.id.et_insulina_correcao_editar);
 
-        this.imgVoltar = v.findViewById(R.id.img_voltar_editar_registro);
         this.btEditarRegistro = v.findViewById(R.id.bt_editar_registro);
         this.btExcluirRegistro = v.findViewById(R.id.bt_excluir_registro);
+
+        this.usuario = LoginActivity.usuarioLogado;
 
         this.registroService = RetrofitBuilder.buildRetrofit().create(RegistroService.class);
     }

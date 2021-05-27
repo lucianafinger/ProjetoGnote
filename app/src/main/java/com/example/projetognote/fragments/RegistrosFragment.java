@@ -5,15 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,11 +26,9 @@ import com.example.projetognote.model.Usuario;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,6 +47,11 @@ public class RegistrosFragment extends Fragment implements AdapterRegistros.OnRe
     private java.sql.Date dataReg;
     int dia, mes, ano;
 
+    private SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
+
+    private Bundle bundleDadosRegistro;
+    private Registro selecionado;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -58,7 +60,6 @@ public class RegistrosFragment extends Fragment implements AdapterRegistros.OnRe
         inicializaComponentes(v);
 
         // configurando a data com o calendar
-        SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
         dataReg = java.sql.Date.valueOf(data.format(new Date(System.currentTimeMillis())));
         Calendar cal = Calendar.getInstance();
         cal.setTime(dataReg);
@@ -68,13 +69,13 @@ public class RegistrosFragment extends Fragment implements AdapterRegistros.OnRe
 
         tvData.setText(String.valueOf(dataReg));
 
-//        System.out.println(usuario.getIdUsuario());
+        System.out.println(usuario.getIdUsuario());
 
-        registroService.buscarDia(dia, mes, ano, usuario.getIdUsuario()).enqueue(new Callback<List<Registro>>() {
+        registroService.buscarDia(dia, mes+1, ano, usuario.getIdUsuario()).enqueue(new Callback<List<Registro>>() {
             @Override
             public void onResponse(Call<List<Registro>> call, Response<List<Registro>> response) {
                 if(response.isSuccessful()){
-                    System.out.println("teste response ok");
+                    System.out.println("teste response ok" + mes+1);
                     listaRegistros.clear();
                     listaRegistros.addAll(response.body());
                     if(listaRegistros.isEmpty()){
@@ -96,8 +97,15 @@ public class RegistrosFragment extends Fragment implements AdapterRegistros.OnRe
         return v;
     }
 
+    // clicar na lista
     @Override
     public void onRegistroClick(int position) {
+        Toast.makeText(getContext(), "clicou na linha: " + position, Toast.LENGTH_SHORT).show();
+        selecionado = listaRegistros.get(position);
+
+        bundleDadosRegistro = new Bundle();
+        bundleDadosRegistro.putSerializable("registro", selecionado);
+        Navigation.findNavController(getView()).navigate(R.id.home_to_editar_registro, bundleDadosRegistro);
 
     }
 

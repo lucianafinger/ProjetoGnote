@@ -2,6 +2,8 @@ package com.example.projetognote.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,11 +45,15 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
     private RegistroService registroService;
 
     private Usuario usuario;
+    private Date dataReg;
+    private int diferenca;
+    private int insulina;
+    private int glicose =0;
 
     public static List<Registro> listaReg = new ArrayList<Registro>();
 
     DateTimeFormatter hora = DateTimeFormatter.ofPattern ("HH:mm:ss");
-    @SuppressLint("SimpleDateFormat")
+
     SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
@@ -64,16 +70,48 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
 
         this.registro = new Registro();
 
+        etGlicose.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (etGlicose.getText().length() > 0) {
+                    glicose = Integer.parseInt(etGlicose.getText().toString());
+                }
+                if(glicose > usuario.getCorrecaoHgt()){
+                    diferenca = glicose - usuario.getCorrecaoHgt();
+
+                    insulina = diferenca/ usuario.getIntervalo();
+                    insulina +=1;
+                    etInsulinaCorrecao.setText(insulina + " ");
+
+                }else if(glicose == usuario.getCorrecaoHgt()){
+                    insulina = 1;
+                    etInsulinaCorrecao.setText(insulina + " ");
+                }else{
+                    insulina = 0;
+                    etInsulinaCorrecao.setText(insulina + " ");
+                }
+            }
+        });
+
+
+
+
         btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                java.sql.Date dataReg = java.sql.Date.valueOf(data.format(new Date(System.currentTimeMillis())));
+
+
                 registro.setDataRegistro(dataReg);
-//                registro.setHoraRegistro(LocalTime.parse(etHora.getText().toString(),hora));
-
-                // *************************
-                // registro.setHoraRegistro(null);
-
+                registro.setHoraRegistro(LocalTime.parse(etHora.getText().toString(),hora));
                 registro.setRegistroGlicose(Integer.parseInt(etGlicose.getText().toString()));
                 registro.setInsulinaRefeicao(Double.parseDouble(etInsulinaRefeicao.getText().toString()));
                 registro.setInsulinaCorrecao(Double.parseDouble(etInsulinaCorrecao.getText().toString()));
@@ -81,12 +119,6 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                 registro.setUsuario(usuario);
 
                 etiqueta();
-
-                System.out.println(registro.getEtiqueta());
-                System.out.println(usuario.getIdUsuario());
-                System.out.println("insulina correcao: " +registro.getInsulinaCorrecao() + " insulina fixa: " + registro.getInsulinaRefeicao());
-                System.out.print(registro.toString());
-                System.out.println(usuario.toString());
 
                 registroService.adicionarRegistro(registro).enqueue(new Callback<Registro>() {
                     @Override

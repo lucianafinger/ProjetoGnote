@@ -32,9 +32,9 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
     @NotEmpty(message = "Preencher e-mail")
     @Email(message = "E-mail inválido")
     private EditText etEmail;
-//    @Password(min = 6, scheme = Password.Scheme.ALPHA_MIXED_CASE)
+    //    @Password(min = 6, scheme = Password.Scheme.ALPHA_MIXED_CASE)
     private EditText etSenha;
-//    @Password(min = 6, scheme = Password.Scheme.ALPHA_MIXED_CASE)
+    //    @Password(min = 6, scheme = Password.Scheme.ALPHA_MIXED_CASE)
     private EditText etConfirmaSenha;
 
     private Button btCadastrar;
@@ -56,11 +56,10 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
             public void onClick(View v) {
                 validator.validate();
             }
-
         });
     }
 
-        @Override
+    @Override
     public void onValidationSucceeded() {
         if(etConfirmaSenha.getText().toString().equals(etSenha.getText().toString())){
             usuario.setEmail(etEmail.getText().toString());

@@ -3,6 +3,7 @@ package com.example.projetognote.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.projetognote.R;
 import com.example.projetognote.RegistroService;
@@ -54,7 +55,7 @@ public class ControleActivity extends AppCompatActivity {
         // Drawer Layout
 
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home_registros, R.id.nav_mensal, R.id.nav_perfil, R.id.nav_logout, R.id.nav_contato)
+                R.id.nav_home_registros, R.id.nav_mensal, R.id.nav_perfil, R.id.nav_logout, R.id.nav_contato, R.id.nav_atualizar_dados)
                 .setOpenableLayout(drawer)
                 .build();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);

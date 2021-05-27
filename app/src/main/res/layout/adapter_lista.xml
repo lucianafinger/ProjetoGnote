@@ -2,24 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_hora"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_marginTop="10sp"
+        android:text="Hora"
+        android:textColor="@color/red_gnote"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
         android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tv_hora_texto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Hora"
-            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/tv_glicose_texto"
@@ -28,24 +29,30 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="HGT"
-            android:textColor="@color/black" />
+            android:textSize="16sp"
+            android:background="@color/blue_gnote"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_insulinafixa_texto"
-            android:layout_width="29dp"
-            android:layout_height="wrap_content"
+            android:layout_width="14dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/blue_gnote"
             android:gravity="center"
             android:text="Dose Fixa"
-            android:textColor="@color/black" />
+            android:textSize="16sp"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_insulinacorrecao_texto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue_gnote"
             android:gravity="center"
             android:text="Dose Correção"
-            android:textColor="@color/black" />
+            android:textSize="16sp"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_etiqueta_texto"
@@ -53,54 +60,54 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Etiqueta"
-            android:textColor="@color/black" />
+            android:textSize="16sp"
+            android:background="@color/blue_gnote"
+            android:textColor="@color/white"  />
 
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tv_hora"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Hora" />
-
-        <TextView
             android:id="@+id/tv_glicose"
-            android:layout_width="35dp"
-            android:layout_height="55dp"
+            android:layout_width="18dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Glicose"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tv_insulina_refeicao"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_width="31dp"
+            android:layout_height="38dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Insulina R" />
+            android:text="Insulina R"
+            android:textSize="16sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tv_insulina_correcao"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Insulina C" />
+            android:textSize="16sp"
+            android:text="Insulina C"
+            android:textColor="@color/black"/>
 
         <ImageView
             android:id="@+id/iv_etiqueta"
-            android:layout_width="36dp"
-            android:layout_height="55dp"
-            android:layout_weight="1"
+            android:layout_width="77dp"
+            android:layout_height="match_parent"
             app:srcCompat="@drawable/bom" />
     </LinearLayout>
+
 </LinearLayout>
