@@ -124,7 +124,15 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Registro> call, Response<Registro> response) {
                         if (response.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso", Toast.LENGTH_LONG).show();
+                            limpaTela();
+
+                            if(registro.getEtiqueta() == "3"){
+                                Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, cuidado com a Hiperglicemia!!", Toast.LENGTH_LONG).show();
+                            }else if(registro.getEtiqueta() == "2") {
+                                Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, se mantenha assim!!", Toast.LENGTH_LONG).show();
+                            }else{
+                                Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, que tal um docinho pra ajudar com a hipoglicemia?", Toast.LENGTH_LONG).show();
+                            }
                             onBackPressed();
                         }else{
                             Toast.makeText(getApplicationContext(), "Erro ao adicionar registro", Toast.LENGTH_LONG).show();
@@ -180,11 +188,21 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
 //                  Etiqueta de bom
         } else if (glicose >= usuario.getIdealMinima() && glicose <= usuario.getIdealMaxima()) {
             registro.setEtiqueta("2");
+        } else{
+            // normal
+            registro.setEtiqueta("0");
         }
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private void limpaTela(){
+        etHora.setText("");
+        etGlicose.setText("");
+        etInsulinaRefeicao.setText("");
+        etInsulinaCorrecao.setText("");
     }
 }

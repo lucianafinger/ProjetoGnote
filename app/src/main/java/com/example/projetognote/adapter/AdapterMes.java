@@ -1,7 +1,5 @@
 package com.example.projetognote.adapter;
 
-
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetognote.R;
@@ -18,31 +15,32 @@ import com.example.projetognote.model.Registro;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyViewHolder> {
+public class AdapterMes extends RecyclerView.Adapter<AdapterMes.MyViewHolder> {
 
-    private List<Registro> listaRegistros;
-    private OnRegistroListener registroListener;
+    private List<Registro> listaRegistrosMes;
+    private AdapterMes.OnRegistroListenerMes onRegistroListenerMes;
 
     private Registro registro;
     DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-    public AdapterRegistros(List<Registro> listaRegistros, OnRegistroListener onRegistroListener) {
-        this.listaRegistros = listaRegistros;
-        this.registroListener = onRegistroListener;
+    public AdapterMes(List<Registro> listaRegistrosMes, AdapterMes.OnRegistroListenerMes onRegistroListenerMes) {
+        this.listaRegistrosMes = listaRegistrosMes;
+        this.onRegistroListenerMes = onRegistroListenerMes;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_lista, parent, false);
-        return new MyViewHolder(itemLista, registroListener);
+    public AdapterMes.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_mes, parent, false);
+        return new AdapterMes.MyViewHolder(itemLista, onRegistroListenerMes);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterMes.MyViewHolder holder, int position) {
         //recupera os dados
-        registro = listaRegistros.get(position);
+        registro = listaRegistrosMes.get(position);
         if (registro != null) {
+            holder.dia.setText(registro.getDataRegistro().toString());
             holder.hora.setText(registro.getHoraRegistro().format(hora));
             holder.glicose.setText(String.valueOf(registro.getRegistroGlicose()));
             holder.insulinaFixa.setText(String.valueOf(registro.getInsulinaRefeicao()));
@@ -51,37 +49,43 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
 
     }
 
-    // quantidade de itens que vai retornar do ViewHolder
     @Override
     public int getItemCount() {
-        if (listaRegistros == null) {
+        if (listaRegistrosMes == null) {
             System.out.println("não foram encontrados registros.");
         } else {
             System.out.println("retorna lista");
-            return this.listaRegistros.size();
+            return this.listaRegistrosMes.size();
         }
         return 0;
+    }
+
+    public interface OnRegistroListenerMes {
+        void onRegistroClick(int position);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView etiqueta;
-        TextView hora, glicose, insulinaFixa, insulinaCorrecao;
-        OnRegistroListener onRegistroListener;
+        TextView dia, hora, glicose, insulinaFixa, insulinaCorrecao;
+        OnRegistroListenerMes onRegistroListenerMes;
 
-        public MyViewHolder(@NonNull View itemView, OnRegistroListener onRegistroListener) {
+        public MyViewHolder(View itemView, OnRegistroListenerMes onRegistroListenerMes) {
             super(itemView);
 
-            hora = itemView.findViewById(R.id.tv_hora);
-            glicose = itemView.findViewById(R.id.tv_glicose);
-            insulinaFixa = itemView.findViewById(R.id.tv_insulina_refeicao);
-            insulinaCorrecao = itemView.findViewById(R.id.tv_insulina_correcao);
-            etiqueta = itemView.findViewById(R.id.iv_etiqueta);
+            dia = itemView.findViewById(R.id.tv_dia_mes);
+            hora = itemView.findViewById(R.id.tv_hora_mes);
+            glicose = itemView.findViewById(R.id.tv_glicose_mes);
+            insulinaFixa = itemView.findViewById(R.id.tv_insulina_refeicao_mes);
+            insulinaCorrecao = itemView.findViewById(R.id.tv_insulina_correcao_mes);
+            etiqueta = itemView.findViewById(R.id.iv_etiqueta_mes);
 
-            this.onRegistroListener = onRegistroListener;
-            itemView.setOnClickListener(this);
+            this.onRegistroListenerMes = onRegistroListenerMes;
+            this.itemView.setOnClickListener(this);
+//            this.onRegistroListener = onRegistroListener;
+//            itemView.setOnClickListener(this);
             if (registro != null) {
-//                 confiigurar imagens etiqueta
+//                 configurar imagens etiqueta
 //                 1 hipo; 2 bom; 3 hiper
                 if (registro.getEtiqueta().equals(String.valueOf(2))) {
                     // bom
@@ -97,19 +101,13 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
                     etiqueta.setImageResource(R.drawable.boa_normal);
                 }
             }
-
-
         }
+
 
         @Override
         public void onClick(View v) {
-            onRegistroListener.onRegistroClick(getAdapterPosition());
-
+            onRegistroListenerMes.onRegistroClick(getAdapterPosition());
         }
-    }
-
-    public interface OnRegistroListener {
-        void onRegistroClick(int position);
     }
 
 }

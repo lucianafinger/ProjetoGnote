@@ -45,7 +45,7 @@ public class RegistrosFragment extends Fragment implements AdapterRegistros.OnRe
     private RegistroService registroService;
 
     private java.sql.Date dataReg;
-    int dia, mes, ano;
+    private int dia, mes, ano;
 
     private SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -71,7 +71,7 @@ public class RegistrosFragment extends Fragment implements AdapterRegistros.OnRe
 
         System.out.println(usuario.getIdUsuario());
 
-        registroService.buscarDia(dia, mes+1, ano, usuario.getIdUsuario()).enqueue(new Callback<List<Registro>>() {
+        this.registroService.buscarDia(dia, mes+1, ano, usuario.getIdUsuario()).enqueue(new Callback<List<Registro>>() {
             @Override
             public void onResponse(Call<List<Registro>> call, Response<List<Registro>> response) {
                 if(response.isSuccessful()){

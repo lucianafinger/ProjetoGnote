@@ -22,9 +22,9 @@
         android:layout_width="match_parent"
         android:layout_height="45dp" />
 
-    <ListView
-        android:id="@+id/lv_registro_mes"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_mes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
