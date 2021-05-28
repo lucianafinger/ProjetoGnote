@@ -1,6 +1,5 @@
 package com.example.projetognote.activity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,7 +46,7 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
     private Date dataReg;
     private int diferenca;
     private int insulina;
-    private int glicose =0;
+    private int glicose = 0;
 
     public static List<Registro> listaReg = new ArrayList<Registro>();
 
@@ -101,9 +99,6 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
 
         btRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override

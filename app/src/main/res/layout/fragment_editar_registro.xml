@@ -60,7 +60,7 @@
                 android:id="@+id/et_insulina_refeicao_editar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Insulina Refeicao" />
+                android:hint="Insulina Refeição" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -73,7 +73,7 @@
                 android:id="@+id/et_insulina_correcao_editar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Insulina Fixa" />
+                android:hint="Insulina Correção" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
