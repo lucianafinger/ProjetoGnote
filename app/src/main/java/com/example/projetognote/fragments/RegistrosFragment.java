@@ -69,8 +69,6 @@ public class RegistrosFragment extends Fragment implements AdapterRegistros.OnRe
 
         tvData.setText(String.valueOf(dataReg));
 
-        System.out.println(usuario.getIdUsuario());
-
         this.registroService.buscarDia(dia, mes+1, ano, usuario.getIdUsuario()).enqueue(new Callback<List<Registro>>() {
             @Override
             public void onResponse(Call<List<Registro>> call, Response<List<Registro>> response) {

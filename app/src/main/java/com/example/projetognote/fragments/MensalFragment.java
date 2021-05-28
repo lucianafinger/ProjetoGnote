@@ -129,7 +129,7 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
 
         bundleDadosRegistro = new Bundle();
         bundleDadosRegistro.putSerializable("registro", selecionado);
-        Navigation.findNavController(getView()).navigate(R.id.home_to_editar_registro, bundleDadosRegistro);
+        Navigation.findNavController(getView()).navigate(R.id.mensal_to_editar_registro, bundleDadosRegistro);
 
     }
 

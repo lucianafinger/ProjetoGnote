@@ -58,7 +58,8 @@
             android:layout_weight="1"
             android:background="@color/blue_gnote"
             android:gravity="center"
-            android:text="Dose Refeição"
+            android:layout_gravity="center"
+            android:text="Dose Ref."
             android:textColor="@color/white"
             android:textSize="16sp" />
 
@@ -68,19 +69,20 @@
             android:layout_height="match_parent"
             android:background="@color/blue_gnote"
             android:gravity="center"
-            android:text="Dose Correção"
-            android:textSize="16sp"
-            android:textColor="@color/white" />
+            android:layout_gravity="center"
+            android:text="Dose Corr."
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_etiqueta_texto_mes"
             android:layout_width="75dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Etiqueta"
-            android:textSize="16sp"
             android:background="@color/blue_gnote"
-            android:textColor="@color/white"  />
+            android:gravity="center"
+            android:text="Status"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
 
     </LinearLayout>
@@ -92,34 +94,34 @@
 
         <TextView
             android:id="@+id/tv_glicose_mes"
-            android:layout_width="18dp"
+            android:layout_width="5dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="Glicose"
             android:textAlignment="center"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_insulina_refeicao_mes"
-            android:layout_width="31dp"
-            android:layout_height="38dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Insulina R"
-            android:textSize="16sp"
-            android:textColor="@color/black"/>
-
-        <TextView
-            android:id="@+id/tv_insulina_correcao_mes"
-            android:layout_width="35dp"
+            android:layout_width="34dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:textSize="16sp"
+            android:text="Insulina R"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_insulina_correcao_mes"
+            android:layout_width="34dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="Insulina C"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/iv_etiqueta_mes"
