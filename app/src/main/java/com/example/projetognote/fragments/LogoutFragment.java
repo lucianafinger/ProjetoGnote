@@ -1,5 +1,6 @@
 package com.example.projetognote.fragments;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,11 +22,17 @@ public class LogoutFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_logout, container, false);
+        this.logout();
+        return null;
+    }
 
-        Intent voltarMain = new Intent(getActivity(), MainActivity.class);
-        startActivity(voltarMain);
-
-        return root;
+    private void logout(){
+        new AlertDialog.Builder(getActivity())
+                .setIcon(R.drawable.ic_logout)
+                .setTitle("Logout")
+                .setMessage("Tem certeza que deseja sair?")
+                .setPositiveButton("Sim", ((dialog, which) -> getActivity().finish()))
+                .setNegativeButton("Não", null)
+                .show();
     }
 }

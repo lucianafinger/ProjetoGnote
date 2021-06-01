@@ -45,6 +45,17 @@ public class AdapterMes extends RecyclerView.Adapter<AdapterMes.MyViewHolder> {
             holder.glicose.setText(String.valueOf(registro.getRegistroGlicose()));
             holder.insulinaFixa.setText(String.valueOf(registro.getInsulinaRefeicao()));
             holder.insulinaCorrecao.setText(String.valueOf(registro.getInsulinaCorrecao()));
+
+            if (registro.getEtiqueta().equals("2")) {
+                holder.etiqueta.setImageResource(R.drawable.muito_boa);
+            } else if (registro.getEtiqueta().equals("1")) {
+                holder.etiqueta.setImageResource(R.drawable.hipo);
+            } else if (registro.getEtiqueta().equals("3")) {
+                holder.etiqueta.setImageResource(R.drawable.hiper);
+            } else {
+                holder.etiqueta.setImageResource(R.drawable.boa);
+            }
+
         }
 
     }
@@ -70,6 +81,8 @@ public class AdapterMes extends RecyclerView.Adapter<AdapterMes.MyViewHolder> {
         TextView dia, hora, glicose, insulinaFixa, insulinaCorrecao;
         OnRegistroListenerMes onRegistroListenerMes;
 
+//        TextView tvBom, tvHipo, tvHiper,tvMuitoBom;
+
         public MyViewHolder(View itemView, OnRegistroListenerMes onRegistroListenerMes) {
             super(itemView);
 
@@ -82,25 +95,7 @@ public class AdapterMes extends RecyclerView.Adapter<AdapterMes.MyViewHolder> {
 
             this.onRegistroListenerMes = onRegistroListenerMes;
             this.itemView.setOnClickListener(this);
-//            this.onRegistroListener = onRegistroListener;
-//            itemView.setOnClickListener(this);
-            if (registro != null) {
-//                 configurar imagens etiqueta
-//                 1 hipo; 2 bom; 3 hiper
-                if (registro.getEtiqueta().equals(String.valueOf(2))) {
-                    // bom
-                    etiqueta.setImageResource(R.drawable.muito_boa);
-                } else if (registro.getEtiqueta().equals(String.valueOf(1))) {
-                    // hipo
-                    etiqueta.setImageResource(R.drawable.hipo);
-                } else if (registro.getEtiqueta().equals(String.valueOf(3))) {
-                    // hiper
-                    etiqueta.setImageResource(R.drawable.hiper);
-                } else {
-                    // normal - imagem padrão
-                    etiqueta.setImageResource(R.drawable.boa_normal);
-                }
-            }
+
         }
 
 

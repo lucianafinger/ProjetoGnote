@@ -46,7 +46,7 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
     private Date dataReg;
     private int diferenca;
     private int insulina;
-    private int glicose = 0;
+    private int glicose;
 
     public static List<Registro> listaReg = new ArrayList<Registro>();
 
@@ -87,15 +87,15 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                     diferenca = glicose - usuario.getCorrecaoHgt();
 
                     insulina = diferenca/ usuario.getIntervalo();
-                    insulina +=1;
-                    etInsulinaCorrecao.setText(insulina + " ");
+                    insulina += 1;
+                    etInsulinaCorrecao.setText(insulina + "");
 
                 }else if(glicose == usuario.getCorrecaoHgt()){
                     insulina = 1;
-                    etInsulinaCorrecao.setText(insulina + " ");
+                    etInsulinaCorrecao.setText(insulina + "");
                 }else{
                     insulina = 0;
-                    etInsulinaCorrecao.setText(insulina + " ");
+                    etInsulinaCorrecao.setText(insulina + "");
                 }
             }
         });
@@ -121,13 +121,16 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                         if (response.isSuccessful()){
                             limpaTela();
 
-                            if(registro.getEtiqueta() == "3"){
+                            if(registro.getEtiqueta().equals("3")){
                                 Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, cuidado com a Hiperglicemia!!", Toast.LENGTH_LONG).show();
-                            }else if(registro.getEtiqueta() == "2") {
+
+                            }else if(registro.getEtiqueta().equals("2")) {
                                 Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, se mantenha assim!!", Toast.LENGTH_LONG).show();
+
                             }else{
                                 Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, que tal um docinho pra ajudar com a hipoglicemia?", Toast.LENGTH_LONG).show();
                             }
+
                             onBackPressed();
                         }else{
                             Toast.makeText(getApplicationContext(), "Erro ao adicionar registro", Toast.LENGTH_LONG).show();
@@ -173,19 +176,19 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
     }
 
     private void etiqueta() {
-        int glicose = Integer.parseInt(etGlicose.getText().toString());
+        glicose = Integer.parseInt(etGlicose.getText().toString());
 //                  Etiqueta de hiper
-        if (glicose > usuario.getIdealMaxima() || glicose >= usuario.getHiperglicemia()) {
+        if (glicose >= usuario.getHiperglicemia()) {
             registro.setEtiqueta("3");
 //                  Etiqueta de hipo
-        } else if (glicose < usuario.getIdealMinima() || glicose <= usuario.getHipoglicemia()) {
+        } else if (glicose <= usuario.getHipoglicemia()) {
             registro.setEtiqueta("1");
-//                  Etiqueta de bom
+//                  Etiqueta de ideal
         } else if (glicose >= usuario.getIdealMinima() && glicose <= usuario.getIdealMaxima()) {
             registro.setEtiqueta("2");
         } else{
             // normal
-            registro.setEtiqueta("0");
+            registro.setEtiqueta("4");
         }
     }
 

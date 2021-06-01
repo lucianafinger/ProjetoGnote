@@ -1,7 +1,5 @@
 package com.example.projetognote.adapter;
 
-
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projetognote.R;
@@ -47,6 +44,18 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
             holder.glicose.setText(String.valueOf(registro.getRegistroGlicose()));
             holder.insulinaFixa.setText(String.valueOf(registro.getInsulinaRefeicao()));
             holder.insulinaCorrecao.setText(String.valueOf(registro.getInsulinaCorrecao()));
+
+            if (registro.getEtiqueta().equals("2")) {
+                holder.etiqueta.setImageResource(R.drawable.muito_boa);
+            } else if (registro.getEtiqueta().equals("1")) {
+                holder.etiqueta.setImageResource(R.drawable.hipo);
+            } else if (registro.getEtiqueta().equals("3")) {
+                holder.etiqueta.setImageResource(R.drawable.hiper);
+            } else {
+                holder.etiqueta.setImageResource(R.drawable.boa);
+            }
+
+
         }
 
     }
@@ -80,24 +89,6 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
 
             this.onRegistroListener = onRegistroListener;
             itemView.setOnClickListener(this);
-            if (registro != null) {
-//                 confiigurar imagens etiqueta
-//                 1 hipo; 2 bom; 3 hiper
-                if (registro.getEtiqueta().equals(String.valueOf(2))) {
-                    // bom
-                    etiqueta.setImageResource(R.drawable.muito_boa);
-                } else if (registro.getEtiqueta().equals(String.valueOf(1))) {
-                    // hipo
-                    etiqueta.setImageResource(R.drawable.hipo);
-                } else if (registro.getEtiqueta().equals(String.valueOf(3))) {
-                    // hiper
-                    etiqueta.setImageResource(R.drawable.hiper);
-                } else {
-                    // normal - imagem padrão
-                    etiqueta.setImageResource(R.drawable.boa_normal);
-                }
-            }
-
 
         }
 

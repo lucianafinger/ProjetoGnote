@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projetognote.R;
@@ -41,6 +42,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MensalFragment extends Fragment implements AdapterMes.OnRegistroListenerMes {
+
+    private TextView tvBom, tvHipo, tvHiper, tvMuitoBom;
+    private int countMuitoBom, countHipo, countHiper, countBom;
 
     private RecyclerView recyclerView;
     private List<Registro> listaRegistrosMes;
@@ -76,31 +80,43 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
         mes = cal.get(Calendar.MONTH);
         ano = cal.get(Calendar.YEAR);
 
-//        SimpleDateFormat data = new SimpleDateFormat("yyyy-MM-dd");
-//        java.sql.Date dataRegistro = java.sql.Date.valueOf(data.format( new Date(System.currentTimeMillis())));
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(dataRegistro);
-//        ano = cal.get(Calendar.YEAR);
-
         // adapter spinner mes
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,vetMeses);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, vetMeses);
         this.spMeses.setAdapter(adapter);
 
         this.spMeses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mes = position+1;
+                mes = position + 1;
                 registroService.buscarMes(mes, ano, usuario.getIdUsuario()).enqueue(new Callback<List<Registro>>() {
                     @Override
                     public void onResponse(Call<List<Registro>> call, Response<List<Registro>> response) {
-                        if(response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             listaRegistrosMes.clear();
                             listaRegistrosMes.addAll(response.body());
-                            if(listaRegistrosMes.isEmpty()){
+
+                            for(int i=0; i<listaRegistrosMes.size(); i++){
+                                if (listaRegistrosMes.get(i).getEtiqueta().equals("2")) {
+                                    countMuitoBom++;
+                                } else if (listaRegistrosMes.get(i).getEtiqueta().equals("1")) {
+                                    countHipo++;
+                                } else if (listaRegistrosMes.get(i).getEtiqueta().equals("3")) {
+                                    countHiper++;
+                                } else {
+                                    countBom++;
+                                }
+                            }
+
+                            tvMuitoBom.setText(String.valueOf(countMuitoBom));
+                            tvBom.setText(String.valueOf(countBom));
+                            tvHiper.setText(String.valueOf(countHiper));
+                            tvHipo.setText(String.valueOf(countHipo));
+
+                            if (listaRegistrosMes.isEmpty()) {
                                 Toast.makeText(getActivity(), "Não há registros neste mês", Toast.LENGTH_LONG).show();
                             }
                             adapterMes.notifyDataSetChanged();
-                        } else{
+                        } else {
                             Log.i("Teste", "socorro" + response.raw());
                             Toast.makeText(getContext(), "Não foram encontrados registros neste mês", Toast.LENGTH_LONG).show();
                         }
@@ -113,6 +129,7 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
                     }
                 });
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -133,7 +150,7 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
 
     }
 
-    private void inicializaComponentes(View v){
+    private void inicializaComponentes(View v) {
         this.recyclerView = v.findViewById(R.id.recycler_mes);
         this.spMeses = v.findViewById(R.id.sp_meses);
         this.usuario = LoginActivity.usuarioLogado;
@@ -145,6 +162,11 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
         this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         this.recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
         this.recyclerView.setAdapter(this.adapterMes);
+
+        this.tvBom = v.findViewById(R.id.tv_bom_dias);
+        this.tvMuitoBom = v.findViewById(R.id.tv_muito_bom_dias);
+        this.tvHipo = v.findViewById(R.id.tv_hipo_dias);
+        this.tvHiper = v.findViewById(R.id.tv_hiper_dias);
 
     }
 }

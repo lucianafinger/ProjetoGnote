@@ -8,8 +8,7 @@
     <string name="title_activity_controle">ControleActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Gnote</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Gnote de:</string>
     <string name="action_settings">Settings</string>
 
 <!--    strings do menu     -->
