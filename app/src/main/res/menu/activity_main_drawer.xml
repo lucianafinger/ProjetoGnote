@@ -4,36 +4,49 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_home_registros"
-            android:icon="@drawable/ic_home_registros"
-            android:title="@string/menu_home_registros" />
-        <item
-            android:id="@+id/nav_mensal"
-            android:icon="@drawable/ic_mensal"
-            android:title="@string/menu_mensal" />
-        <item
-            android:id="@+id/nav_perfil"
-            android:icon="@drawable/ic_perfil"
-            android:title="@string/menu_perfil" />
-        <item
-            android:id="@+id/nav_atualizar_dados"
-            android:icon="@drawable/ic_dados_insulina"
-            android:title="@string/menu_atualizar_dados" />
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_voltar"
-            android:title="@string/menu_logout" />
+        <item android:title="Registros">
+            <menu>
+                <item
+                    android:id="@+id/nav_home_registros"
+                    android:icon="@drawable/ic_home_registros"
+                    android:title="@string/menu_home_registros" />
+
+                <item
+                    android:id="@+id/nav_mensal"
+                    android:icon="@drawable/ic_mensal"
+                    android:title="@string/menu_mensal" />
+            </menu>
+        </item>
 
     </group>
 
-    <item android:title="Contato">
-        <menu>
-            <item
-                android:id="@+id/nav_contato"
-                android:icon="@drawable/ic_contato"
-                android:title="@string/menu_contato" />
-        </menu>
-    </item>
+    <group android:checkableBehavior="single">
+        <item android:title="Perfil">
+            <menu>
+                <item
+                    android:id="@+id/nav_perfil"
+                    android:icon="@drawable/ic_perfil"
+                    android:title="@string/menu_perfil" />
+                <item
+                    android:id="@+id/nav_atualizar_dados"
+                    android:icon="@drawable/ic_dados_insulina"
+                    android:title="@string/menu_atualizar_dados" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_voltar"
+                    android:title="@string/menu_logout" />
+            </menu>
+        </item>
 
+    </group>
+
+<item android:title="Contato">
+<menu>
+    <item
+        android:icon="@drawable/ic_contato"
+        android:id="@+id/nav_contato"
+        android:title="@string/menu_contato" />
 </menu>
+</item>
+
+    </menu>

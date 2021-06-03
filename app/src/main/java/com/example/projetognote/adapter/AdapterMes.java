@@ -18,7 +18,7 @@ import java.util.List;
 public class AdapterMes extends RecyclerView.Adapter<AdapterMes.MyViewHolder> {
 
     private List<Registro> listaRegistrosMes;
-    private AdapterMes.OnRegistroListenerMes onRegistroListenerMes;
+    private OnRegistroListenerMes onRegistroListenerMes;
 
     private Registro registro;
     DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -32,7 +32,7 @@ public class AdapterMes extends RecyclerView.Adapter<AdapterMes.MyViewHolder> {
     @Override
     public AdapterMes.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemLista = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_mes, parent, false);
-        return new AdapterMes.MyViewHolder(itemLista, onRegistroListenerMes);
+        return new MyViewHolder(itemLista, onRegistroListenerMes);
     }
 
     @Override
@@ -81,8 +81,6 @@ public class AdapterMes extends RecyclerView.Adapter<AdapterMes.MyViewHolder> {
         TextView dia, hora, glicose, insulinaFixa, insulinaCorrecao;
         OnRegistroListenerMes onRegistroListenerMes;
 
-//        TextView tvBom, tvHipo, tvHiper,tvMuitoBom;
-
         public MyViewHolder(View itemView, OnRegistroListenerMes onRegistroListenerMes) {
             super(itemView);
 
@@ -95,9 +93,7 @@ public class AdapterMes extends RecyclerView.Adapter<AdapterMes.MyViewHolder> {
 
             this.onRegistroListenerMes = onRegistroListenerMes;
             this.itemView.setOnClickListener(this);
-
         }
-
 
         @Override
         public void onClick(View v) {

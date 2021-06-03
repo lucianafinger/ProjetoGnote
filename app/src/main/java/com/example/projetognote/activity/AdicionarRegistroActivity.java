@@ -1,5 +1,6 @@
 package com.example.projetognote.activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -122,16 +123,14 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
                             limpaTela();
 
                             if(registro.getEtiqueta().equals("3")){
-                                Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, cuidado com a Hiperglicemia!!", Toast.LENGTH_LONG).show();
-
-                            }else if(registro.getEtiqueta().equals("2")) {
-                                Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, se mantenha assim!!", Toast.LENGTH_LONG).show();
-
+                                hiper();
+                            }else if(registro.getEtiqueta().equals("1")) {
+                                hipo();
                             }else{
-                                Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, que tal um docinho pra ajudar com a hipoglicemia?", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso, se mantenha assim!", Toast.LENGTH_LONG).show();
+                                onBackPressed();
                             }
 
-                            onBackPressed();
                         }else{
                             Toast.makeText(getApplicationContext(), "Erro ao adicionar registro", Toast.LENGTH_LONG).show();
                             Log.i("DEBUG", response.errorBody().toString());
@@ -150,7 +149,7 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // voltar tela anterior
-                onBackPressed();
+               onBackPressed();
             }
         });
 
@@ -202,5 +201,23 @@ public class AdicionarRegistroActivity extends AppCompatActivity {
         etGlicose.setText("");
         etInsulinaRefeicao.setText("");
         etInsulinaCorrecao.setText("");
+    }
+
+    private void hipo(){
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_aviso)
+                .setTitle("Hipoglicemia")
+                .setMessage("A glicose está baixa, que tal um docinho?")
+                .setPositiveButton("Ok", ((dialog, which) -> AdicionarRegistroActivity.this.onBackPressed()))
+                .show();
+    }
+
+    private void hiper(){
+        new AlertDialog.Builder(this)
+                .setIcon(R.drawable.ic_aviso)
+                .setTitle("Hiperglicemia")
+                .setMessage("Cuidado com as taxas altas!")
+                .setPositiveButton("Ok", ((dialog, which) -> AdicionarRegistroActivity.this.onBackPressed()))
+                .show();
     }
 }

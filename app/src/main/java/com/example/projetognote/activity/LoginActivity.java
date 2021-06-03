@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etSenha;
     private Button btLogar;
-    private TextView tvEsqueceuSenha;
     private Usuario user;
     private UsuarioService usuarioService;  // AJR - Gnote - 15/05/2021
     public static Usuario usuarioLogado;
@@ -41,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // BEGIN of AJR - Gnote - 15/05/2021
-                // verificar e passar p proxima tela
 
                 String email = etEmail.getText().toString();
                 String senha = etSenha.getText().toString();
@@ -51,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         if (response.isSuccessful()){
                             if (response.body() == null){
-                                Toast.makeText(getApplicationContext(), "Erro ao efetuar login", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Erro ao efetuar login. Verifique a senha e tente novamente", Toast.LENGTH_LONG).show();
                             }else {
                                 usuarioLogado = response.body();
                                 Toast.makeText(getApplicationContext(), "Bem vindo", Toast.LENGTH_LONG).show();
@@ -72,21 +70,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-//        tvEsqueceuSenha.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // encaminha nova senha por e-mail já cadastrado
-//            }
-//        });
-        // END of AJR - Gnote - 15/05/2021
-
     }
 
     private void inicializaComponentes() {
         etEmail = findViewById(R.id.et_email_login);
         etSenha = findViewById(R.id.et_senha_login); // AJR - Gnote - 15/05/2021
         btLogar = findViewById(R.id.bt_logar);
-        tvEsqueceuSenha = findViewById(R.id.tv_esqueceu_senha);
         this.usuarioService = RetrofitBuilder.buildRetrofit().create(UsuarioService.class); // AJR - Gnote - 15/05/2021
     }
 

@@ -18,13 +18,24 @@
             android:id="@+id/linearLayout1"
             android:layout_width="match_parent"
             android:layout_height="397dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="30dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/str_cadastro"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txt_email"
@@ -91,6 +102,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
+
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -98,6 +110,8 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="85dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +127,6 @@
                 android:background="@drawable/custom_button"
                 android:text="@string/str_cadastrar"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

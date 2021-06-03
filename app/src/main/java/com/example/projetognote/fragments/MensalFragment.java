@@ -81,13 +81,13 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
         ano = cal.get(Calendar.YEAR);
 
         // adapter spinner mes
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, vetMeses);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1,vetMeses);
         this.spMeses.setAdapter(adapter);
 
         this.spMeses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mes = position + 1;
+                mes = position+1;
                 registroService.buscarMes(mes, ano, usuario.getIdUsuario()).enqueue(new Callback<List<Registro>>() {
                     @Override
                     public void onResponse(Call<List<Registro>> call, Response<List<Registro>> response) {
@@ -112,6 +112,8 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
                             tvHiper.setText(String.valueOf(countHiper));
                             tvHipo.setText(String.valueOf(countHipo));
 
+                            resetCount();
+
                             if (listaRegistrosMes.isEmpty()) {
                                 Toast.makeText(getActivity(), "Não há registros neste mês", Toast.LENGTH_LONG).show();
                             }
@@ -134,6 +136,7 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
 
         return v;
     }
@@ -168,5 +171,12 @@ public class MensalFragment extends Fragment implements AdapterMes.OnRegistroLis
         this.tvHipo = v.findViewById(R.id.tv_hipo_dias);
         this.tvHiper = v.findViewById(R.id.tv_hiper_dias);
 
+    }
+
+    private void resetCount(){
+        countBom = 0;
+        countHiper = 0;
+        countMuitoBom = 0;
+        countHipo = 0;
     }
 }

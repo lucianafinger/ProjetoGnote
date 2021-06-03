@@ -32,9 +32,10 @@ public class CadastroActivity extends AppCompatActivity implements Validator.Val
     @NotEmpty(message = "Preencher e-mail")
     @Email(message = "E-mail inválido")
     private EditText etEmail;
-    //    @Password(min = 6, scheme = Password.Scheme.ALPHA_MIXED_CASE)
+    // numero, letra maiuscula e minuscula, caracteres
+    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
     private EditText etSenha;
-    //    @Password(min = 6, scheme = Password.Scheme.ALPHA_MIXED_CASE)
+    @Password(min = 6, scheme = Password.Scheme.ALPHA_NUMERIC_MIXED_CASE_SYMBOLS)
     private EditText etConfirmaSenha;
 
     private Button btCadastrar;

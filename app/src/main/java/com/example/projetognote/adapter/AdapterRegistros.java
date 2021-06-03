@@ -55,7 +55,6 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
                 holder.etiqueta.setImageResource(R.drawable.boa);
             }
 
-
         }
 
     }
@@ -70,6 +69,11 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
             return this.listaRegistros.size();
         }
         return 0;
+    }
+
+
+    public interface OnRegistroListener {
+        void onRegistroClick(int position);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -88,7 +92,7 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
             etiqueta = itemView.findViewById(R.id.iv_etiqueta);
 
             this.onRegistroListener = onRegistroListener;
-            itemView.setOnClickListener(this);
+            this.itemView.setOnClickListener(this);
 
         }
 
@@ -97,10 +101,6 @@ public class AdapterRegistros extends RecyclerView.Adapter<AdapterRegistros.MyVi
             onRegistroListener.onRegistroClick(getAdapterPosition());
 
         }
-    }
-
-    public interface OnRegistroListener {
-        void onRegistroClick(int position);
     }
 
 }

@@ -49,8 +49,6 @@ public class EditarRegistroFragment extends Fragment {
 
         registro = getArguments().getParcelable("registro");
 
-        System.out.println(registro.getIdRegistro());
-
         inicializaComponentes(v);
 
         this.etHoraEditar.setText(registro.getHoraRegistro().format(hora));

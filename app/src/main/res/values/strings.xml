@@ -11,7 +11,9 @@
     <string name="nav_header_title">Gnote de:</string>
     <string name="action_settings">Settings</string>
 
-<!--    strings do menu     -->
+    <string name="str_cadastro">Cadastrar Dados Pessoais:</string>
+
+    <!--    strings do menu     -->
     <string name="menu_home_registros">Registros</string>
     <string name="menu_mensal">Visão Mensal</string>
     <string name="menu_perfil">Perfil</string>
@@ -24,9 +26,14 @@
     <string name="str_ideal_min">Intervalo ideal valor mínimo:</string>
     <string name="str_ideal_max">Intervalo ideal valor máximo:</string>
 
-<!--    cabeçalho editar/adicionar registro    -->
+    <!--    cabeçalho editar/adicionar registro    -->
     <string name="str_editar_reg">Editar Registro:</string>
     <string name="str_adicionar_reg">Adicionar Registro:</string>
     <string name="str_spinner_mes">Selecione o mês:</string>
+
+    <!--    contato    -->
+    <string name="str_contato">Para entrar em contato envie e-mail para:</string>
+    <string name="str_email_ana">anapereira.ssnfq@academico.ifsul.br</string>
+    <string name="str_email_luciana">lucianaribeiro.ssnfq@academico.ifsul.br</string>
 
 </resources>
